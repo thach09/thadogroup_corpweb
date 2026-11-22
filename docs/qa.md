@@ -1,6 +1,6 @@
 # Nghiệm thu website THADO GROUP
 
-**Ngày 22/11/2026.** Báo cáo ghi kết quả trên nhánh sửa lỗi `fix/post-m0-audit-and-validation`, sau khi PR #1 (`feat/corporate-website-v1`) đã merge thành công vào `main` tại SHA `cb95c5ac3730c80b81f1c1c5a33825a60c931cb9`. Chưa có review độc lập: cùng một agent kỹ thuật thực hiện tuần tự việc phát triển, kiểm thử và rà soát bảo mật.
+**Ngày 22/11/2026.** Báo cáo ghi kết quả trên nhánh `fix/final-pre-release-stabilization`, kế thừa sau khi PR #1 (`feat/corporate-website-v1`) và PR #6 (`fix/post-m0-audit-and-validation`) đã merge thành công vào `main` tại SHA `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881`. CI trên `main` (run 45038511590) đã kiểm tra thành công. Chưa có review độc lập: cùng một agent kỹ thuật thực hiện tuần tự việc phát triển, kiểm thử và rà soát bảo mật.
 
 ## Môi trường đo
 
@@ -90,14 +90,14 @@ Bản preview đạt Performance 100, Accessibility 100, Best Practices 100 và 
 - [EN desktop](qa/en-chromium-desktop.png)
 - [EN mobile](qa/en-chromium-mobile.png)
 
-## Điều kiện còn chờ
+## Điều kiện còn chờ trước khi phát hành Production
 
-- Chưa có URL HTTPS cho Ganbarou và Jiayou. Cả hai đang hiển thị “Sắp ra mắt” / “Coming soon”. Chủ dự án quyết định cung cấp URL hoặc chấp thuận phát hành thu gọn.
-- Chưa xác minh deep link Zalo trên thiết bị thật. Footer giữ số và nút sao chép; không gắn liên kết Zalo đoán.
-- Chưa có quyền Cloudflare Pages và GitHub admin trong môi trường này. Chưa tạo preview URL công khai, chưa bật bảo vệ `main`, chưa xác nhận push protection/secret scanning.
-- Chưa kiểm tra header và TLS trên `thadocorp.com` vì chưa triển khai domain.
-- Chưa có review độc lập của Tester/Security và chưa thử trên thiết bị di động thật.
-- CI mới chạy cục bộ; GitHub Actions sẽ chạy khi nhánh được đẩy và mở PR.
+- **URL Jiayou:** Ganbarou đã có URL chính thức `https://heyganba.site/` (*Owner provided*); Jiayou chưa có URL chính thức, tiếp tục duy trì trạng thái "Sắp ra mắt" (*Coming soon*).
+- **Kiểm thử Zalo trên điện thoại thật:** Liên kết `https://zalo.me/0354314095` dạng thẻ `<a>` native đã được chủ tài khoản xác nhận đích trên desktop (*Owner confirmed*). Hành vi mở ứng dụng Zalo trên điện thoại Android/iOS thật cần chủ dự án kiểm nghiệm thủ công (*Pending manual test*).
+- **Quyền Cloudflare Pages:** Môi trường chưa đăng nhập tài khoản Cloudflare; cần chủ dự án cấp quyền hoặc thiết lập biến môi trường `GANBAROU_URL` và `APPROVED_RELEASE_SHA` theo hướng dẫn.
+- **Quy tắc bảo vệ `main`:** Cần chủ dự án kích hoạt branch ruleset cho `main` trên GitHub Settings để yêu cầu CI check `Build and browser tests` trước khi merge.
+- **Tên miền và TLS trên `thadocorp.com`:** Chưa triển khai domain và chưa trỏ DNS vì chờ phê duyệt mốc phát hành M3.
+- **Đánh giá độc lập:** Chưa có chuyên viên bên ngoài đánh giá độc lập; mọi bài test hiện tại được thực thi tự động qua bộ kiểm thử chuẩn của dự án.
 
 ## Chạy lại
 

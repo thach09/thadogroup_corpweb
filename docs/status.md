@@ -1,10 +1,10 @@
 # Trạng thái dự án THADO GROUP v1
 
-**Cập nhật 22/11/2026.** Trạng thái tính đến nhánh sửa lỗi `fix/post-m0-audit-and-validation`, sau khi PR #1 (`feat/corporate-website-v1`) đã merge thành công vào `main` tại SHA `cb95c5ac3730c80b81f1c1c5a33825a60c931cb9`.
+**Cập nhật 22/11/2026.** Trạng thái tính đến nhánh `fix/final-pre-release-stabilization`, sau khi PR #1 (`cb95c5a`) và PR #6 (`e8fc0b2`) đã merge thành công vào `main`. HEAD của `main` hiện tại là `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881`. PR #5 (Dependabot TypeScript 7.x) đã đóng, không merge.
 
 ## Tóm tắt
 
-- **Mã nguồn và nhánh chính:** PR #1 đã merge vào `main`. Nhánh sửa lỗi `fix/post-m0-audit-and-validation` được tạo từ `main` để giải quyết các tồn đọng hậu M0: bổ sung native link Zalo, cấu hình chặn xung đột Dependabot TypeScript 7.x, hỗ trợ URL Ganbarou chính thức (`https://heyganba.site/`), bổ sung Open Graph metadata và kiểm thử viewport 320 px.
+- **Mã nguồn và nhánh chính:** Cả PR #1 và PR #6 đã merge vào `main`. CI GitHub Actions run [45038511590](https://github.com/thach09/thadogroup_corpweb/actions/runs/45038511590) trên `main` đạt kết quả xanh tuyệt đối. Nhánh `fix/final-pre-release-stabilization` thực hiện đợt rà soát ổn định cuối cùng (Final Stabilization & Pre-release Verification).
 - **Nội dung và liên kết:** Chủ dự án đã xác nhận tính chính xác của baseline M0, xác nhận đích Zalo trên desktop và cung cấp URL HTTPS chính thức cho Ganbarou (`https://heyganba.site/`). Jiayou tiếp tục duy trì trạng thái "Sắp ra mắt" / "Coming soon".
 - **Kiểm thử tự động:** Toàn bộ 75 bài test Playwright trên 5 viewport (Desktop 1440px, Tablet 768px, Mobile 390px, Mobile 360px, Narrow 320px) đạt 59 pass, 16 skip có chủ đích, 0 fail; axe-core 0 vi phạm; `npm audit` 0 lỗ hổng.
 - **Phát hành:** Chưa triển khai production và chưa gắn domain `thadocorp.com`. Đang chờ chủ dự án phê duyệt commit release, cấp quyền Cloudflare Pages và hoàn tất kế hoạch DNS/TLS.

@@ -1,6 +1,6 @@
 # Rà soát bảo mật website THADO GROUP
 
-**Ngày 22/11/2026.** Phạm vi: mã nguồn, cấu hình build, header tĩnh, dependency, liên kết và quyền CI trên nhánh `feat/corporate-website-v1`, commit mã nguồn `5cb592895fcc256963b2dfa30fd531256612dba9`. Đây là rà soát của cùng agent phát triển, không phải review độc lập. Chưa có quyền quản trị GitHub/Cloudflare để xác nhận cấu hình bảo vệ repo và host.
+**Ngày 22/11/2026.** Phạm vi: mã nguồn, cấu hình build, header tĩnh, dependency, liên kết và quyền CI trên nhánh `fix/final-pre-release-stabilization`, kế thừa commit HEAD `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881` trên `main`. Đây là rà soát kỹ thuật của cùng agent phối hợp, không phải review độc lập. Chưa có quyền quản trị GitHub/Cloudflare để trực tiếp bật cấu hình bảo vệ repo và host.
 
 ## Kết luận
 
@@ -20,7 +20,7 @@ Không phát hiện lỗi chặn phát hành ở phần mã nguồn và cấu h�
 | Dependency | `package.json`, lockfile, `npm audit`, dependabot.yml | Phiên bản ghim chính xác; audit 0 lỗ hổng; Dependabot cấu hình npm & Actions hằng tuần, ignore major version của `typescript` để ngăn xung đột peer dependency với `@astrojs/check` |
 | Mã nguy hiểm | Rà soát `src/`, `public/` | Không `eval`, `innerHTML`, `document.write`, script động, iframe hay xử lý dữ liệu người dùng |
 | Build production | `astro.config.mjs`, test production | Bản preview có `noindex`; bản production bắt buộc `SITE_URL` đúng origin, bỏ `noindex`, robots cho phép index và sitemap dùng domain đã duyệt |
-| CI | `.github/workflows/ci.yml`; GitHub Actions run 45034705226 | Quyền `contents: read`; checkout không giữ credentials; action ghim theo SHA; không có token hosting; workflow xanh trên draft PR #1 |
+| CI | `.github/workflows/ci.yml`; GitHub Actions run 45038511590 | Quyền `contents: read`; checkout không giữ credentials; action ghim theo SHA; không có token hosting; workflow xanh trên `main` sau merge PR #6 |
 | Quyền repo | GitHub API với quyền quản trị, 22/11/2026 | `main` chưa được bảo vệ (404); Dependabot alerts tắt (404), automated security fixes tắt; secret scanning và push protection đã bật; non-provider patterns và validity checks tắt; Actions cho phép mọi action và không bắt buộc ghim SHA |
 
 ## Rủi ro còn lại và điều kiện
@@ -30,7 +30,7 @@ Không phát hiện lỗi chặn phát hành ở phần mã nguồn và cấu h�
 3. **Phát hành có kiểm soát.** Cloudflare Pages phải tắt tự động deploy production; build production chỉ chạy khi `APPROVED_RELEASE_SHA` khớp SHA đã duyệt. Không đặt token Cloudflare trong repo.
 4. **Domain và DNS.** Việc chuyển nameserver, bản ghi MX/SPF/DKIM/DMARC và CAA cần kiểm kê, đối chiếu và duyệt riêng trước khi trỏ lưu lượng. Giữ HTTPS và HSTS; kiểm tra chứng chỉ sau khi gắn domain.
 5. **CSP là chính sách chặt.** Nếu sau này thêm style inline, script inline, analytics hoặc font bên ngoài, phải cập nhật CSP có chủ đích và chạy lại test; không thêm `unsafe-inline` để xử lý nhanh.
-6. **Zalo.** Chỉ thay nút sao chép bằng deep link sau khi xác minh đích mở đúng tài khoản trên thiết bị thật. Giữ số đọc được và thông báo kết quả cho screen reader.
+6. **Zalo.** Đã có liên kết trực tiếp `https://zalo.me/0354314095` trên website bên cạnh nút sao chép dự phòng. Đích trên desktop đã được chủ tài khoản xác nhận (*Owner confirmed*). Giữ số đọc được và thông báo kết quả cho screen reader. Khi có điều kiện thử nghiệm trên điện thoại thật có cài Zalo, chủ dự án kiểm nghiệm thêm thao tác mở app (*Pending manual test*).
 7. **URL sản phẩm.** Chỉ điền URL HTTPS đã được chủ dự án xác nhận. Cấu hình hiện từ chối HTTP và URL có credentials; link rỗng hiển thị trạng thái tĩnh, không tạo link giả.
 
 ## Phân mức

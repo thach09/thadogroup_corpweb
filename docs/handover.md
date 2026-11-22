@@ -6,12 +6,14 @@
 
 | Mục | Giá trị |
 | --- | --- |
-| Nhánh sửa lỗi | `fix/post-m0-audit-and-validation` |
+| Nhánh hoàn thiện cuối | `fix/final-pre-release-stabilization` |
 | Nhánh chính | `main` |
-| Commit merge PR #1 trên main | `cb95c5ac3730c80b81f1c1c5a33825a60c931cb9` |
+| Commit HEAD hiện tại trên `main` | `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881` |
+| Các PR đã merge vào `main` | [#1](https://github.com/thach09/thadogroup_corpweb/pull/1) (nền tảng v1), [#6](https://github.com/thach09/thadogroup_corpweb/pull/6) (hậu M0) |
+| PR đã đóng (không merge) | [#5](https://github.com/thach09/thadogroup_corpweb/pull/5) (xung đột TS 7.x) |
+| CI gần nhất trên `main` | Run [45038511590](https://github.com/thach09/thadogroup_corpweb/actions/runs/45038511590) — Success |
 | Baseline lịch sử | `3e110374c39dd00201194b7986d97fc9ed39679c` (`main` ban đầu, chỉ có `README.md`) |
 | Remote | `origin` = https://github.com/thach09/thadogroup_corpweb |
-| PR trước đó | [#1](https://github.com/thach09/thadogroup_corpweb/pull/1) — đã merge thành công ngày 22/11/2026 |
 | Preview công khai | **Chưa có** — môi trường chưa đăng nhập Cloudflare Pages |
 | Domain production | **Chưa gắn** — `thadocorp.com` là domain dự kiến |
 | Trạng thái production | **Chưa triển khai**; không có DNS hoặc traffic nào bị thay đổi |
