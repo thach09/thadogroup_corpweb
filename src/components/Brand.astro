@@ -1,0 +1,9 @@
+---
+import { copy, type Language } from '../data/content';
+interface Props { lang: Language }
+const { lang } = Astro.props;
+---
+<a class="brand" href={lang === 'vi' ? '/' : '/en/'} aria-label={copy[lang].home}>
+  <img src="/favicon.svg" alt="" width="38" height="38" />
+  <span>THADO <b>GROUP</b></span>
+</a>

@@ -1,0 +1,35 @@
+---
+import Frame from './Frame.astro';
+import Header from './Header.astro';
+import Sectors from './Sectors.astro';
+import Products from './Products.astro';
+import Footer from './Footer.astro';
+import { copy, type Language } from '../data/content';
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const t = copy[lang];
+---
+<Frame lang={lang}>
+  <Header lang={lang} />
+  <main id="main" tabindex="-1">
+    <div class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{t.intro}</p>
+          <h1>{t.headline.map(line => <span>{line}{' '}</span>)}</h1>
+          <p class="lead">{t.lead}</p>
+          <a class="primary" href="#products">{t.explore}</a>
+        </div>
+        <Sectors lang={lang} />
+      </div>
+    </div>
+    <section class="about" id="about" aria-labelledby="about-title" tabindex="-1">
+      <div class="wrap about-grid" data-reveal>
+        <div><p class="eyebrow">{t.nav.about}</p><h2 id="about-title" class="section-title">{t.aboutTitle}</h2></div>
+        <p>{t.aboutText}</p>
+      </div>
+    </section>
+    <Products lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Frame>

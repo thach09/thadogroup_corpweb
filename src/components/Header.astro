@@ -1,0 +1,22 @@
+---
+import { copy, type Language } from '../data/content';
+import Brand from './Brand.astro';
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const t = copy[lang];
+---
+<a class="skip" href="#main">{t.skip}</a>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <Brand lang={lang} />
+    <div class="language" aria-label={lang === 'vi' ? 'Ngôn ngữ' : 'Language'} role="group">
+      {(['vi', 'en'] as const).map(item => <a href={item === 'vi' ? '/' : '/en/'} lang={item} hreflang={item} aria-label={item === 'vi' ? 'VI – Tiếng Việt' : 'EN – English'} aria-current={item === lang ? 'page' : undefined}>{item.toUpperCase()}</a>)}
+    </div>
+    <button id="menu-toggle" class="menu-toggle" type="button" hidden aria-controls="site-nav" aria-expanded="false">
+      <span class="menu-lines" aria-hidden="true"></span>{t.menu}
+    </button>
+    <nav id="site-nav" aria-label={lang === 'vi' ? 'Menu chính' : 'Main menu'}>
+      {Object.entries(t.nav).map(([id, label]) => <a href={'#' + id}>{label}</a>)}
+    </nav>
+  </div>
+</header>
