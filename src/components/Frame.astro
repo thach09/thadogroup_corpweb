@@ -22,7 +22,9 @@ const en = new URL('/en/', Astro.site).href;
     <meta property="og:type" content="website" />
     <meta property="og:url" content={lang === 'vi' ? vi : en} />
     <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={new URL('/brand/logo.png', Astro.site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={new URL('/brand/logo.png', Astro.site).href} />
     {(!import.meta.env.PUBLIC_INDEX_SITE || missing) && <meta name="robots" content="noindex, nofollow" />}
     {!missing && <>
       <link rel="canonical" href={lang === 'vi' ? vi : en} />
@@ -31,6 +33,8 @@ const en = new URL('/en/', Astro.site).href;
       <link rel="alternate" hreflang="x-default" href={vi} />
     </>}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <script is:inline src="/site.js" defer></script>
   </head>
   <body><slot /></body>
