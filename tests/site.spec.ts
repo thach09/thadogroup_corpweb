@@ -75,8 +75,7 @@ for (const locale of locales) {
       const phone = contact.getByRole('link', { name: /^0354314095/ });
       const zaloLink = contact.getByRole('link', { name: /(Zalo|Liên hệ qua Zalo|Contact via Zalo)/i });
       await expect(zaloLink).toHaveAttribute('href', 'https://zalo.me/0354314095');
-      const copy = contact.getByRole('button', { name: /Zalo|sao chép|copy/i });
-      for (const target of [phone, zaloLink, copy]) {
+      for (const target of [phone, zaloLink]) {
         const dimensions = await target.boundingBox();
         expect(dimensions!.width, 'Touch target width').toBeGreaterThanOrEqual(44);
         expect(dimensions!.height, 'Touch target height').toBeGreaterThanOrEqual(44);
@@ -103,30 +102,22 @@ for (const locale of locales) {
       await expect(page).toHaveURL(/#about$/);
     });
 
-    test('Zalo copy action reports feedback and keeps the number readable', async ({ page }) => {
+    test('social channels include Facebook, GitHub and Zalo in one row', async ({ page }) => {
       const contact = page.locator('#contact');
-      const copy = contact.getByRole('button', { name: /Zalo|sao chép|copy/i });
-      const feedback = contact.locator('[aria-live], [role="status"]').first();
-      await expect(copy).toBeVisible();
-      await page.evaluate(() => {
-        Object.defineProperty(navigator, 'clipboard', {
-          configurable: true,
-          value: { writeText: (value: string) => { document.body.dataset.copied = value; return Promise.resolve(); } },
-        });
-      });
-      await copy.click();
-      await expect(page.locator('body')).toHaveAttribute('data-copied', '0354314095');
-      await expect(feedback).toContainText(/(Đã sao chép|number copied)/i);
-      await page.evaluate(() => {
-        Object.defineProperty(navigator, 'clipboard', { configurable: true, value: undefined });
-        document.execCommand = () => true;
-      });
-      await copy.click();
-      await expect(feedback).toContainText(/(Đã sao chép|number copied)/i);
-      await page.evaluate(() => { document.execCommand = () => false; });
-      await copy.click();
-      await expect(feedback).toContainText(/(chọn và sao chép|Select and copy)/i);
-      await expect(contact).toContainText('0354314095');
+      const socials = contact.locator('.socials');
+      const links = socials.locator('a');
+      await expect(links).toHaveCount(3);
+      const fb = socials.getByRole('link', { name: 'Facebook' });
+      const gh = socials.getByRole('link', { name: 'GitHub' });
+      const zalo = socials.getByRole('link', { name: /(Zalo|Liên hệ qua Zalo|Contact via Zalo)/i });
+      await expect(fb).toHaveAttribute('href', 'https://www.facebook.com/hcaht.09?locale=vi_VN');
+      await expect(gh).toHaveAttribute('href', 'https://github.com/thach09');
+      await expect(zalo).toHaveAttribute('href', 'https://zalo.me/0354314095');
+      for (const link of [fb, gh, zalo]) {
+        const dimensions = await link.boundingBox();
+        expect(dimensions!.width).toBeGreaterThanOrEqual(44);
+        expect(dimensions!.height).toBeGreaterThanOrEqual(44);
+      }
     });
 
     test('accessibility, reduced motion and visual evidence', async ({ page }, info) => {

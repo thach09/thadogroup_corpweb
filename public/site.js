@@ -28,56 +28,6 @@ if (toggle && nav) {
   });
 }
 
-const copy = document.querySelector('#copy-number');
-const feedback = document.querySelector('#copy-status');
-if (copy && feedback) {
-  copy.hidden = false;
-
-  function legacyCopy(value) {
-    if (typeof document.execCommand !== 'function') return false;
-    const field = document.createElement('textarea');
-    field.value = value;
-    field.setAttribute('readonly', '');
-    field.style.position = 'fixed';
-    field.style.opacity = '0';
-    document.body.append(field);
-    field.select();
-    let copied = false;
-    try {
-      copied = document.execCommand('copy');
-    } catch {
-      copied = false;
-    }
-    field.remove();
-    return copied;
-  }
-
-  async function writeNumber(value) {
-    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-      try {
-        await navigator.clipboard.writeText(value);
-        return true;
-      } catch {
-        // Fall back to the selection-based copy used by older or restricted browsers.
-      }
-    }
-    return legacyCopy(value);
-  }
-
-  function announce(message) {
-    feedback.textContent = '';
-    window.setTimeout(() => { feedback.textContent = message; }, 0);
-  }
-
-  copy.addEventListener('click', async () => {
-    const copied = await writeNumber(copy.dataset.number);
-    announce(copied ? copy.dataset.success : copy.dataset.fallback);
-    if (copied) {
-      copy.classList.add('copied');
-      window.setTimeout(() => { copy.classList.remove('copied'); }, 2000);
-    }
-  });
-}
 
 if ('IntersectionObserver' in window && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
   const observer = new IntersectionObserver(entries => {
