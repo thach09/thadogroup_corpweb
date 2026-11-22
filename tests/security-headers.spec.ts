@@ -50,7 +50,7 @@ test('both pages load their assets under the Pages content security policy', asy
   for (const path of ['/', '/en/']) {
     await page.goto(path, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.locator('#copy-number')).toBeVisible();
+    await expect(page.locator('#contact .socials')).toBeVisible();
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
     expect(violations, path).toEqual([]);
   }
