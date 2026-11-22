@@ -11,7 +11,7 @@ const areas = ['edu', 'tech', 'media', 'home'] as const;
     {areas.map((area, index) => {
       const Tag = area === 'edu' ? 'a' : 'div';
       return <li>
-        <Tag class:list={['sector', { active: area === 'edu' }]} href={area === 'edu' ? '#products' : undefined}>
+        <Tag class:list={['sector', { active: area === 'edu' }]} href={area === 'edu' ? '#products' : undefined} data-reveal>
           <span class="sector-icon"><Icon name={area} /></span>
           <span class="sector-name"><strong>THADO {area.toUpperCase()}</strong>{t.sectorNames[index] && <small>{t.sectorNames[index]}</small>}</span>
           <span class="sector-status">{area === 'edu' ? t.building : t.planned}</span>

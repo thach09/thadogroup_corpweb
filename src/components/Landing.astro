@@ -14,7 +14,7 @@ const t = copy[lang];
   <main id="main" tabindex="-1">
     <div class="hero">
       <div class="wrap hero-grid">
-        <div class="hero-copy">
+        <div class="hero-copy" data-reveal>
           <p class="eyebrow">{t.intro}</p>
           <h1>{t.headline.map(line => <span>{line}{' '}</span>)}</h1>
           <p class="lead">{t.lead}</p>
@@ -25,7 +25,7 @@ const t = copy[lang];
     </div>
     <section class="about" id="about" aria-labelledby="about-title" tabindex="-1">
       <div class="wrap about-grid" data-reveal>
-        <div><p class="eyebrow">{t.nav.about}</p><h2 id="about-title" class="section-title">{t.aboutTitle}</h2></div>
+        <div><h2 id="about-title" class="section-title">{t.aboutTitle}</h2></div>
         <p>{t.aboutText}</p>
       </div>
     </section>

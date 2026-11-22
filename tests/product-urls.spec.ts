@@ -44,7 +44,7 @@ test('configured HTTPS product URLs produce direct, same-tab links in both langu
 
   // Case D: Default build without environment variables intentionally renders coming-soon for both products
   const defaultOutput = info.outputPath('default-no-env');
-  await buildAstro(defaultOutput, {});
+  await buildAstro(defaultOutput, { GANBAROU_URL: '', JIAYOU_URL: '' });
   for (const [index, soonText] of [['index.html', 'Sắp ra mắt'], ['en/index.html', 'Coming soon']]) {
     const html = await readFile(join(defaultOutput, index), 'utf8');
     await page.setContent(html);

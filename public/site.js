@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 const toggle = document.querySelector('#menu-toggle');
 const nav = document.querySelector('#site-nav');
 if (toggle && nav) {
@@ -28,7 +30,6 @@ if (toggle && nav) {
   });
 }
 
-
 if ('IntersectionObserver' in window && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
@@ -37,6 +38,6 @@ if ('IntersectionObserver' in window && matchMedia('(prefers-reduced-motion: no-
         observer.unobserve(entry.target);
       }
     }
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('[data-reveal]').forEach(section => observer.observe(section));
 }

@@ -69,7 +69,12 @@ h1 { font-size:clamp(3.35rem,5.05vw,5.05rem); line-height:1.16; font-weight:580;
 .about-grid > p { color:#384b66; font-size:clamp(1.04rem,1.32vw,1.2rem); line-height:1.84 }
 .products { padding:clamp(64px,7vw,100px) 0; color:white; background:var(--ink) }
 .product-grid { margin-top:32px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px }
-.product { position:relative; isolation:isolate; overflow:hidden; padding:clamp(26px,3vw,42px); border:1px solid #405372; background:#1a3257 }
+.product { position:relative; isolation:isolate; overflow:hidden; padding:clamp(26px,3vw,42px); border:1px solid #405372; background:#1a3257; display:flex; flex-direction:column; justify-content:space-between; min-height:240px; transition:transform .35s cubic-bezier(0.16,1,0.3,1), border-color .3s ease, box-shadow .35s ease }
+.product.is-clickable { cursor:pointer }
+.product.is-clickable:hover { transform:translateY(-5px); border-color:#d5dfed; box-shadow:0 14px 32px rgba(0,0,0,0.3) }
+.product .card-link { position:absolute; inset:0; z-index:2; text-indent:-9999px }
+.product-arrow { display:inline-flex; align-items:center; color:#ff8c9e; margin-top:24px; transition:transform .25s cubic-bezier(0.16,1,0.3,1), color .2s ease }
+.product.is-clickable:hover .product-arrow { transform:translateX(6px); color:#ffc8d2 }
 .product::after { content:''; position:absolute; z-index:-1; top:0; right:0; width:48%; height:100%; opacity:.18; background:repeating-linear-gradient(125deg,transparent 0 20px,#9aaacc 21px,transparent 22px 34px); mask-image:linear-gradient(260deg,black,transparent 92%) }
 .jiayou { background:#263550 }
 .jiayou::after { background:repeating-linear-gradient(40deg,transparent 0 20px,#a8adbb 21px,transparent 22px 34px) }
@@ -88,9 +93,9 @@ footer h2 { font-size:1.75rem; letter-spacing:-.045em; margin-top:16px; font-wei
 .contact-person strong { display:block; font-size:1.05rem; margin:3px 0 13px }
 .phone { display:inline-flex; align-items:center; min-height:44px; font-weight:700 }
 .phone:hover { color:var(--red); text-decoration:underline }
-.socials { display:flex; align-items:center; gap:10px }
-.socials a { display:grid; place-items:center; width:44px; height:44px; background:white; border:1px solid var(--line); border-radius:2px }
-.socials a:hover { background:#f9eff1; border-color:#b45c6c }
+.socials { display:flex; align-items:center; gap:12px }
+.socials a { display:grid; place-items:center; width:44px; height:44px; background:transparent; border:none; border-radius:4px; transition:transform .25s cubic-bezier(0.16,1,0.3,1), opacity .2s ease }
+.socials a:hover { transform:translateY(-2px); opacity:0.75 }
 .legal { margin-top:30px; border-top:1px solid var(--line); padding-top:16px; font-size:.78rem }
 .error-page { padding:12vh 0 }
 .error-page h1 { margin:24px 0 12px }
@@ -137,15 +142,31 @@ footer h2 { font-size:1.75rem; letter-spacing:-.045em; margin-top:16px; font-wei
   .sectors { padding:17px 13px }
   .sector { gap:8px }
 }
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.js [data-reveal].entered {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-grid [data-reveal]:nth-child(2) { transition-delay: 0.12s }
+.sectors li:nth-child(1) [data-reveal] { transition-delay: 0.04s }
+.sectors li:nth-child(2) [data-reveal] { transition-delay: 0.1s }
+.sectors li:nth-child(3) [data-reveal] { transition-delay: 0.16s }
+.sectors li:nth-child(4) [data-reveal] { transition-delay: 0.22s }
+
 @keyframes enter { from { opacity:.45; transform:translateY(10px) } to { opacity:1; transform:none } }
 @media (prefers-reduced-motion:no-preference) {
   .hero h1, .hero .lead, .sectors li { animation:enter 420ms ease-out both }
   .sectors li:nth-child(2) { animation-delay:60ms }
   .sectors li:nth-child(3) { animation-delay:120ms }
   .sectors li:nth-child(4) { animation-delay:180ms }
-  [data-reveal].entered { animation:enter 430ms ease-out }
   .sectors li:focus-within,[data-reveal]:focus-within { animation:none }
 }
 @media (prefers-reduced-motion:reduce) {
   :root { scroll-behavior:auto }
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important }
 }
