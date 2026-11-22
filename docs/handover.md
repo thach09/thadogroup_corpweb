@@ -8,7 +8,8 @@
 | --- | --- |
 | Nhánh | `feat/corporate-website-v1` |
 | Commit xuất phát | `3e110374c39dd00201194b7986d97fc9ed39679c` (`main`, chỉ có `README.md`) |
-| Commit bàn giao | Xem `git log -1 --format=%H` sau khi commit; SHA cũng được ghi trong PR |
+| Commit mã nguồn và QA | `5cb592895fcc256963b2dfa30fd531256612dba9` — commit tài liệu kế tiếp chỉ cập nhật mục này |
+| Commit tài liệu | Xem `git log -1 --format=%H`; không thay đổi mã nguồn hay build |
 | Remote | `origin` = https://github.com/thach09/thadogroup_corpweb |
 | Preview công khai | **Chưa có** — môi trường chưa đăng nhập Cloudflare Pages |
 | Domain production | **Chưa gắn** — `thadocorp.com` là domain dự kiến |

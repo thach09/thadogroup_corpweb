@@ -1,6 +1,6 @@
 # Trạng thái dự án THADO GROUP v1
 
-**Cập nhật 22/11/2026.** Trạng thái tính đến cây làm việc trên nhánh `feat/corporate-website-v1`, trước khi phát hành. SHA bàn giao và trạng thái push/PR được ghi trong [`docs/handover.md`](handover.md).
+**Cập nhật 22/11/2026.** Trạng thái tính đến cây làm việc trên nhánh `feat/corporate-website-v1`, trước khi phát hành. Commit mã nguồn và QA là `5cb592895fcc256963b2dfa30fd531256612dba9`; commit tài liệu sau đó chỉ cập nhật báo cáo. Trạng thái push/PR được ghi trong [`docs/handover.md`](handover.md).
 
 ## Tóm tắt
 

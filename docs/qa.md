@@ -1,6 +1,6 @@
 # Nghiệm thu website THADO GROUP
 
-**Ngày 22/11/2026.** Báo cáo ghi kết quả trên nhánh `feat/corporate-website-v1`. Commit bàn giao và SHA đã kiểm tra được ghi trong [`docs/handover.md`](handover.md) và PR. Chưa có review độc lập: cùng một agent thực hiện phát triển, kiểm thử và rà soát bảo mật.
+**Ngày 22/11/2026.** Báo cáo ghi kết quả trên nhánh `feat/corporate-website-v1`, commit mã nguồn và QA `5cb592895fcc256963b2dfa30fd531256612dba9`. Commit tài liệu sau đó chỉ cập nhật báo cáo, không đổi mã nguồn. SHA cũng được ghi trong [`docs/handover.md`](handover.md) và PR. Chưa có review độc lập: cùng một agent thực hiện phát triển, kiểm thử và rà soát bảo mật.
 
 ## Môi trường đo
 

@@ -1,6 +1,6 @@
 # Rà soát bảo mật website THADO GROUP
 
-**Ngày 22/11/2026.** Phạm vi: mã nguồn, cấu hình build, header tĩnh, dependency, liên kết và quyền CI trên nhánh `feat/corporate-website-v1`. Đây là rà soát của cùng agent phát triển, không phải review độc lập. Chưa có quyền quản trị GitHub/Cloudflare để xác nhận cấu hình bảo vệ repo và host.
+**Ngày 22/11/2026.** Phạm vi: mã nguồn, cấu hình build, header tĩnh, dependency, liên kết và quyền CI trên nhánh `feat/corporate-website-v1`, commit mã nguồn `5cb592895fcc256963b2dfa30fd531256612dba9`. Đây là rà soát của cùng agent phát triển, không phải review độc lập. Chưa có quyền quản trị GitHub/Cloudflare để xác nhận cấu hình bảo vệ repo và host.
 
 ## Kết luận
 
