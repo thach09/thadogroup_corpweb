@@ -11,6 +11,8 @@
 | Commit mã nguồn và QA | `5cb592895fcc256963b2dfa30fd531256612dba9` — commit tài liệu kế tiếp chỉ cập nhật mục này |
 | Commit tài liệu | Xem `git log -1 --format=%H`; không thay đổi mã nguồn hay build |
 | Remote | `origin` = https://github.com/thach09/thadogroup_corpweb |
+| Draft PR | [#1](https://github.com/thach09/thadogroup_corpweb/pull/1) — draft, chưa merge, chờ chủ dự án duyệt |
+| CI | **Website CI** run [45034705226](https://github.com/thach09/thadogroup_corpweb/actions/runs/45034705226) — success trên commit `4ae38104ab5a7af08da276b0ff15dd33a2562f01`; commit tài liệu sau đó chỉ thay đổi docs |
 | Preview công khai | **Chưa có** — môi trường chưa đăng nhập Cloudflare Pages |
 | Domain production | **Chưa gắn** — `thadocorp.com` là domain dự kiến |
 | Trạng thái production | **Chưa triển khai**; không có DNS hoặc traffic nào bị thay đổi |

@@ -35,6 +35,7 @@ Playwright chạy trên `dist/`. Bộ test đối chiếu canonical, hreflang, �
 | --- | --- |
 | `npm run check` | 0 lỗi, 0 cảnh báo, 0 gợi ý trên 17 tệp |
 | `npm run build` | 3 trang, `robots.txt`, `sitemap.xml`; exit 0 |
+| GitHub Actions | **Website CI** trên draft PR #1, run 45034705226: success (npm ci, check, build, Playwright) |
 | `npx playwright test` | 60 test: 47 pass, 13 skip có chủ đích, 0 fail |
 | axe (`wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa`) | 0 vi phạm trên 4 cấu hình, cả VI và EN |
 | `npm audit` | 0 lỗ hổng (info/low/moderate/high/critical = 0) |

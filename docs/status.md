@@ -15,7 +15,7 @@ Phát hành production đang chờ các quyết định của chủ dự án: UR
 | M0 · Chốt sitemap, wireframe, nội dung | Hoàn tất bản trình; chủ dự án chưa ghi nhận duyệt nội dung cuối | PM, CEO Agent | [`docs/M0.md`](M0.md) |
 | M1 · Dựng nền Astro, layout, màu, CI, preview noindex | Hoàn tất cục bộ | Senior Dev, DevOps | `package.json`, `astro.config.mjs`, `.github/workflows/ci.yml`, `docs/release.md` |
 | M2 · Giao diện hai ngôn ngữ, sản phẩm, footer, animation | Hoàn tất cục bộ | Senior Dev | `src/`, `public/`, ảnh trong `docs/qa/` |
-| M3 · QA, axe, Lighthouse, header, bảo mật | Hoàn tất phần cục bộ; review độc lập và host thật còn chờ | Tester, Security | [`docs/qa.md`](qa.md), [`docs/security.md`](security.md) |
+| M3 · QA, axe, Lighthouse, header, bảo mật | Hoàn tất phần cục bộ; CI xanh trên draft PR; review độc lập và host thật còn chờ | Tester, Security | [`docs/qa.md`](qa.md), [`docs/security.md`](security.md), [PR #1](https://github.com/thach09/thadogroup_corpweb/pull/1) |
 | M3 · Phát hành production, DNS, TLS | Chưa thực hiện | DevOps, chủ dự án | [`docs/release.md`](release.md) |
 
 ## Backlog và việc đang chờ

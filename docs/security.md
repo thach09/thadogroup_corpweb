@@ -20,7 +20,7 @@ Không phát hiện lỗi chặn phát hành ở phần mã nguồn và cấu h�
 | Dependency | `package.json`, lockfile, `npm audit` | Phiên bản ghim chính xác; lockfile được commit; audit 0 lỗ hổng tại thời điểm kiểm tra; Dependabot cấu hình npm và GitHub Actions hằng tuần |
 | Mã nguy hiểm | Rà soát `src/`, `public/` | Không `eval`, `innerHTML`, `document.write`, script động, iframe hay xử lý dữ liệu người dùng |
 | Build production | `astro.config.mjs`, test production | Bản preview có `noindex`; bản production bắt buộc `SITE_URL` đúng origin, bỏ `noindex`, robots cho phép index và sitemap dùng domain đã duyệt |
-| CI | `.github/workflows/ci.yml` | Quyền `contents: read`; checkout không giữ credentials; action ghim theo SHA; không có token hosting; upload artifact giới hạn 7 ngày |
+| CI | `.github/workflows/ci.yml`; GitHub Actions run 45034705226 | Quyền `contents: read`; checkout không giữ credentials; action ghim theo SHA; không có token hosting; workflow xanh trên draft PR #1 |
 | Quyền repo | GitHub API công khai; API bảo vệ nhánh trả 401 | Chưa xác nhận branch protection, secret scanning, push protection và Dependabot alerts; cần quản trị viên kiểm tra |
 
 ## Rủi ro còn lại và điều kiện
