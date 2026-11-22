@@ -1,0 +1,19 @@
+---
+import { copy, type Language } from '../data/content';
+import { products } from '../data/products';
+interface Props { lang: Language }
+const t = copy[Astro.props.lang];
+---
+<section class="products" id="products" aria-labelledby="product-title" tabindex="-1">
+  <div class="wrap">
+    <h2 id="product-title" class="section-title">{t.productTitle}</h2>
+    <div class="product-grid">
+      {products.map(p => <article class={'product ' + p.id} data-reveal>
+        <span class="glyph" aria-hidden="true" lang={p.id === 'ganbarou' ? 'ja' : 'zh'}>{p.id === 'ganbarou' ? 'が' : '中'}</span>
+        <h3>{p.name}</h3>
+        <p>{t.productDescriptions[p.id]}</p>
+        {p.status === 'available' ? <a class="product-link" href={p.url}>{t.visit(p.name)}</a> : <span class="soon">{t.soon}</span>}
+      </article>)}
+    </div>
+  </div>
+</section>

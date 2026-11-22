@@ -1,0 +1,13 @@
+---
+const paths = {
+  edu: ['m2 9 10-5 10 5-10 5z', 'M6 11v5c4 3 8 3 12 0v-5', 'M22 9v7'],
+  tech: ['M8 5H5v14h14V5h-4', 'M9 8h6v7H9z', 'M9 2v3m5-3v3M9 19v3m5-3v3M2 9h3m-3 5h3m14-5h3m-3 5h3'],
+  media: ['M3 5h18v14H3z', 'm10 9 5 3-5 3z'],
+  home: ['m2 11 10-8 10 8', 'M5 10v11h14V10', 'M10 21v-7h4v7'],
+  copy: ['M8 8h12v13H8z','M16 5V3H4v14h1']
+} as const;
+interface Props { name: keyof typeof paths }
+---
+<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+  {paths[Astro.props.name].map(d => <path d={d} />)}
+</svg>

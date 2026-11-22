@@ -1,0 +1,29 @@
+---
+import { copy, type Language } from '../data/content';
+import { contact } from '../data/contact';
+import Brand from './Brand.astro';
+import Icon from './Icon.astro';
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const t = copy[lang];
+---
+<footer id="contact" tabindex="-1">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><Brand lang={lang} /><h2>{t.nav.contact}</h2></div>
+      <div class="contact-person"><p class="label">{t.founder}</p><strong>{contact.founder}</strong>
+        <p class="label">{t.phone}</p><a class="phone" href={contact.tel}>{contact.phone}</a>
+      </div>
+      <div class="contact-social">
+        <div class="socials">
+          {(['facebook','github'] as const).map(service => <a href={contact[service]} aria-label={service === 'facebook' ? 'Facebook' : 'GitHub'}><img src={'/icons/' + service + '.svg'} alt="" width="22" height="22" /></a>)}
+        </div>
+        <div class="zalo"><span class="zalo-mark">Zalo</span><span>{contact.phone}</span>
+          <button type="button" hidden id="copy-number" aria-label={t.copy} title={t.copy} data-number={contact.phone} data-success={t.copied} data-fallback={t.manual}><Icon name="copy" /></button>
+        </div>
+        <p class="feedback" role="status" id="copy-status"></p>
+      </div>
+    </div>
+    <div class="legal">© {new Date().getUTCFullYear()} THADO GROUP</div>
+  </div>
+</footer>

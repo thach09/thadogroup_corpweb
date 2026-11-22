@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import { copy, type Language } from '../data/content';
+interface Props { lang: Language }
+const t = copy[Astro.props.lang];
+const areas = ['edu', 'tech', 'media', 'home'] as const;
+---
+<section class="sectors" id="sectors" aria-labelledby="sector-title" tabindex="-1">
+  <h2 id="sector-title">{t.sectorTitle}</h2>
+  <ul>
+    {areas.map((area, index) => {
+      const Tag = area === 'edu' ? 'a' : 'div';
+      return <li>
+        <Tag class:list={['sector', { active: area === 'edu' }]} href={area === 'edu' ? '#products' : undefined}>
+          <span class="sector-icon"><Icon name={area} /></span>
+          <span class="sector-name"><strong>THADO {area.toUpperCase()}</strong>{t.sectorNames[index] && <small>{t.sectorNames[index]}</small>}</span>
+          <span class="sector-status">{area === 'edu' ? t.building : t.planned}</span>
+        </Tag>
+      </li>;
+    })}
+  </ul>
+</section>
