@@ -25,7 +25,7 @@ test('configured HTTPS product URLs produce direct, same-tab links in both langu
     }
   }
 
-  // Test the current real project state: Ganbarou is approved (https://heyganba.site/), Jiayou remains coming-soon
+  // Case A & B: Real project state — Ganbarou approved (https://heyganba.site/), Jiayou remains coming-soon
   const realStateOutput = info.outputPath('ganbarou-only');
   await buildAstro(realStateOutput, { GANBAROU_URL: 'https://heyganba.site/' });
   for (const [index, soonText] of [['index.html', 'Sắp ra mắt'], ['en/index.html', 'Coming soon']]) {
@@ -40,6 +40,20 @@ test('configured HTTPS product URLs produce direct, same-tab links in both langu
     const jiayouArticle = products.getByRole('article').filter({ has: page.getByRole('heading', { name: 'Jiayou' }) });
     await expect(jiayouArticle.getByText(soonText, { exact: true })).toBeVisible();
     await expect(jiayouArticle.getByRole('link')).toHaveCount(0);
+  }
+
+  // Case D: Default build without environment variables intentionally renders coming-soon for both products
+  const defaultOutput = info.outputPath('default-no-env');
+  await buildAstro(defaultOutput, {});
+  for (const [index, soonText] of [['index.html', 'Sắp ra mắt'], ['en/index.html', 'Coming soon']]) {
+    const html = await readFile(join(defaultOutput, index), 'utf8');
+    await page.setContent(html);
+    const products = page.locator('#products');
+    for (const name of ['Ganbarou', 'Jiayou']) {
+      const article = products.getByRole('article').filter({ has: page.getByRole('heading', { name }) });
+      await expect(article.getByText(soonText, { exact: true })).toBeVisible();
+      await expect(article.getByRole('link')).toHaveCount(0);
+    }
   }
 
   // A build must refuse product links that are not plain HTTPS URLs.

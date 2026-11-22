@@ -2,7 +2,7 @@
 
 ## Trạng thái repo
 
-Ngày 22/11/2026, PR triển khai ban đầu #1 (`feat/corporate-website-v1`) đã được merge thành công vào `main` tại SHA `cb95c5ac3730c80b81f1c1c5a33825a60c931cb9`. Nhánh sửa lỗi `fix/post-m0-audit-and-validation` được tạo từ `main` để hoàn thiện các tồn đọng hậu M0.
+Ngày 22/11/2026, PR triển khai ban đầu #1 (`feat/corporate-website-v1`) và PR #6 (`fix/post-m0-audit-and-validation`) đã được merge thành công vào `main` tại SHA `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881`. Nhánh `fix/final-pre-release-stabilization` thực hiện đợt rà soát ổn định cuối cùng trước khi bàn giao cho chủ dự án nghiệm thu.
 
 **Kiểm tra ngày 22/11/2026:** build preview và production đều đạt; Playwright 75 test (59 pass, 16 skip có chủ đích, 0 fail), axe 0 vi phạm trên 5 viewport (kể cả 320 px), Lighthouse mobile production 100/100/100/100, header đúng trên Wrangler Pages cục bộ. Môi trường này chưa đăng nhập Cloudflare (`wrangler whoami` báo chưa xác thực), nên **chưa có preview URL công khai và chưa triển khai production**. Thiết lập bảo vệ `main` và Dependabot alerts vẫn đang tắt; cần chủ dự án quyết định trong GitHub Settings. Xem [QA](qa.md) và [bảo mật](security.md).
 
