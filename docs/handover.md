@@ -87,7 +87,7 @@ Tóm tắt lần chạy cuối: `npm run check` sạch; `npm run build` thành c
 
 1. Chủ dự án cung cấp hoặc xác nhận URL Ganbarou và Jiayou, hoặc chấp thuận phát hành thu gọn với trạng thái tĩnh.
 2. Xác minh Zalo trên thiết bị thật (hoặc giữ nguyên nút sao chép).
-3. Cấp quyền Cloudflare Pages và GitHub admin; tạo preview, bật bảo vệ `main`, kiểm tra Dependabot/secret scanning/push protection.
+3. Cấp quyền Cloudflare Pages; quyết định bật bảo vệ `main` và Dependabot alerts/security updates (hiện đang tắt). Secret scanning và push protection đã bật.
 4. Duyệt M0/nội dung cuối và SHA phát hành; đặt `APPROVED_RELEASE_SHA` đúng SHA.
 5. Kiểm kê DNS, bảo toàn email, kiểm tra TLS và duyệt thời điểm chuyển lưu lượng cho `thadocorp.com`.
 6. Chạy lại QA trên đúng SHA phát hành, kiểm tra thiết bị thật và header trên host thật.

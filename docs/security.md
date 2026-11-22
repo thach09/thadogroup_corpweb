@@ -21,12 +21,12 @@ Không phát hiện lỗi chặn phát hành ở phần mã nguồn và cấu h�
 | Mã nguy hiểm | Rà soát `src/`, `public/` | Không `eval`, `innerHTML`, `document.write`, script động, iframe hay xử lý dữ liệu người dùng |
 | Build production | `astro.config.mjs`, test production | Bản preview có `noindex`; bản production bắt buộc `SITE_URL` đúng origin, bỏ `noindex`, robots cho phép index và sitemap dùng domain đã duyệt |
 | CI | `.github/workflows/ci.yml`; GitHub Actions run 45034705226 | Quyền `contents: read`; checkout không giữ credentials; action ghim theo SHA; không có token hosting; workflow xanh trên draft PR #1 |
-| Quyền repo | GitHub API công khai; API bảo vệ nhánh trả 401 | Chưa xác nhận branch protection, secret scanning, push protection và Dependabot alerts; cần quản trị viên kiểm tra |
+| Quyền repo | GitHub API với quyền quản trị, 22/11/2026 | `main` chưa được bảo vệ (404); Dependabot alerts tắt (404), automated security fixes tắt; secret scanning và push protection đã bật; non-provider patterns và validity checks tắt; Actions cho phép mọi action và không bắt buộc ghim SHA |
 
 ## Rủi ro còn lại và điều kiện
 
 1. **Chưa kiểm tra trên host thật.** Header mới được xác nhận trên Wrangler Pages cục bộ. Khi có preview/production, chạy lại `curl -I` trên `/`, `/en/`, một asset và một đường dẫn 404; đối chiếu đúng `public/_headers`.
-2. **Bảo vệ nhánh và chuỗi cung ứng chưa xác nhận.** Cần bật quy tắc cho `main` (review + check CI), secret scanning, push protection và Dependabot alerts theo quyền sẵn có. Không merge khi CI đỏ.
+2. **Bảo vệ nhánh và Dependabot alerts chưa bật.** `main` hiện không có quy tắc bảo vệ; Dependabot alerts và automated security fixes đang tắt. Secret scanning và push protection đã bật. Cần chủ dự án quyết định bật quy tắc cho `main` (lưu ý repo một người: yêu cầu review cần reviewer khác hoặc quy tắc phù hợp) và bật Dependabot alerts/security updates. Không merge khi CI đỏ.
 3. **Phát hành có kiểm soát.** Cloudflare Pages phải tắt tự động deploy production; build production chỉ chạy khi `APPROVED_RELEASE_SHA` khớp SHA đã duyệt. Không đặt token Cloudflare trong repo.
 4. **Domain và DNS.** Việc chuyển nameserver, bản ghi MX/SPF/DKIM/DMARC và CAA cần kiểm kê, đối chiếu và duyệt riêng trước khi trỏ lưu lượng. Giữ HTTPS và HSTS; kiểm tra chứng chỉ sau khi gắn domain.
 5. **CSP là chính sách chặt.** Nếu sau này thêm style inline, script inline, analytics hoặc font bên ngoài, phải cập nhật CSP có chủ đích và chạy lại test; không thêm `unsafe-inline` để xử lý nhanh.

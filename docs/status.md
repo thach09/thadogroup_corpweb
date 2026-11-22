@@ -26,7 +26,7 @@ Phát hành production đang chờ các quyết định của chủ dự án: UR
 | URL HTTPS Jiayou | Chủ dự án cung cấp; PM theo dõi | Thiếu; hiển thị “Sắp ra mắt” | CTA chưa mở được website sản phẩm |
 | Xác minh deep link Zalo trên thiết bị thật | Chủ dự án hoặc Tester có thiết bị | Chưa xác minh; giữ số và nút sao chép | Chưa dùng liên kết mở Zalo |
 | Quyền Cloudflare Pages | DevOps, quản trị viên | Chưa đăng nhập; chưa có preview URL công khai | Chưa có link preview trên hạ tầng thật |
-| Quyền GitHub admin, branch protection, Dependabot alerts, push protection | DevOps, quản trị viên | API bảo vệ nhánh trả 401; chưa xác nhận | Chưa chứng minh được kiểm soát merge và secret scanning |
+| Quyền GitHub admin, branch protection, Dependabot alerts, push protection | DevOps, quản trị viên | `main` chưa được bảo vệ; Dependabot alerts và automated security fixes đang tắt; secret scanning và push protection đã bật | Chưa chứng minh được kiểm soát merge và cập nhật bảo mật tự động |
 | Duyệt M0 và nội dung cuối | Chủ dự án | Bản trình đã có, chưa có biên bản duyệt | Chưa chốt nội dung phát hành |
 | Duyệt SHA và thời điểm phát hành | Chủ dự án, CEO Agent | Chưa có SHA được duyệt | Cloudflare production build sẽ từ chối nếu thiếu `APPROVED_RELEASE_SHA` |
 | DNS, TLS, email cho `thadocorp.com` | Chủ dự án, DevOps | Chưa kiểm kê zone thực tế | Chưa thể chuyển lưu lượng |
