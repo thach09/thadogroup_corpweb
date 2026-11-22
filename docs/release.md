@@ -2,13 +2,28 @@
 
 ## Trạng thái repo
 
-Ngày 22/11/2026, GitHub API công khai trả về repo public, nhánh mặc định `main`, thuộc tính `protected: false` và danh sách quy tắc áp dụng cho nhánh rỗng. Commit xuất phát là `3e110374c39dd00201194b7986d97fc9ed39679c`. API quản trị ngày 22/11/2026 xác nhận `main` chưa được bảo vệ, Dependabot alerts và automated security fixes đang tắt, secret scanning và push protection đã bật, Actions cho phép mọi action và chưa bắt buộc ghim SHA. Chủ repo cần quyết định bật bảo vệ `main` (lưu ý repo một người) và Dependabot alerts/security updates trong Settings → Advanced Security. File Dependabot trong repo cấu hình cập nhật npm và GitHub Actions hằng tuần. [Repo GitHub](https://github.com/thach09/thadogroup_corpweb)
+Ngày 22/11/2026, PR triển khai ban đầu #1 (`feat/corporate-website-v1`) đã được merge thành công vào `main` tại SHA `cb95c5ac3730c80b81f1c1c5a33825a60c931cb9`. Nhánh sửa lỗi `fix/post-m0-audit-and-validation` được tạo từ `main` để hoàn thiện các tồn đọng hậu M0.
 
-**Kiểm tra cục bộ ngày 22/11/2026:** build preview và production đều đạt; Playwright 60 test (47 pass, 13 skip có chủ đích), axe 0 vi phạm, Lighthouse mobile production 100/100/100/100, header đúng trên Wrangler Pages cục bộ. Draft PR [#1](https://github.com/thach09/thadogroup_corpweb/pull/1) đã có CI **Website CI** xanh (run 45034705226). Môi trường này chưa đăng nhập Cloudflare (`wrangler whoami` báo chưa xác thực), nên **chưa có preview URL công khai và chưa triển khai production**. Thiết lập bảo vệ `main` và Dependabot alerts vẫn đang tắt; chưa thay đổi vì cần chủ dự án quyết định. Xem [QA](qa.md) và [bảo mật](security.md).
+**Kiểm tra ngày 22/11/2026:** build preview và production đều đạt; Playwright 75 test (59 pass, 16 skip có chủ đích, 0 fail), axe 0 vi phạm trên 5 viewport (kể cả 320 px), Lighthouse mobile production 100/100/100/100, header đúng trên Wrangler Pages cục bộ. Môi trường này chưa đăng nhập Cloudflare (`wrangler whoami` báo chưa xác thực), nên **chưa có preview URL công khai và chưa triển khai production**. Thiết lập bảo vệ `main` và Dependabot alerts vẫn đang tắt; cần chủ dự án quyết định trong GitHub Settings. Xem [QA](qa.md) và [bảo mật](security.md).
 
-Đặt quy tắc bảo vệ `main` yêu cầu review PR và check **Build and browser tests** thành công. Công việc CI chỉ cần đọc nội dung repo, không có token hosting. Ghi kết quả check từ GitHub vào PR cùng SHA, ảnh desktop/mobile, URL preview gắn với SHA, các quyết định còn chờ và phương án quay lui.
+Đề xuất quy tắc bảo vệ `main` (Settings → Rules → Rulesets):
+- Bắt buộc kiểm tra trạng thái **Build and browser tests** thành công trước khi merge.
+- Yêu cầu Pull Request trước khi nhập vào `main`.
+- Chặn force push (`Block force pushes`) và cấm xóa nhánh `main` (`Block deletions`).
+- Với repo một người quản trị, không bắt buộc số lượng approval cứng để chủ repo vẫn có thể merge PR sau khi CI xanh.
 
-## Cấu hình Cloudflare Pages
+## Cấu hình biến môi trường sản phẩm
+
+Khi phát hành production, cấu hình biến trong Cloudflare Pages:
+```ini
+NODE_VERSION=24.21.0
+SKIP_DEPENDENCY_INSTALL=1
+SITE_ENV=production
+SITE_URL=https://thadocorp.com
+APPROVED_RELEASE_SHA=<SHA đầy đủ được duyệt>
+GANBAROU_URL=https://heyganba.site/
+# JIAYOU_URL=<để trống nếu chưa có>
+```
 
 1. Trong Workers & Pages, tạo dự án Pages kết nối Git và cấp GitHub App quyền trên riêng repo này. Chọn production branch `main`, root là thư mục gốc, output là `dist`. Đặt `NODE_VERSION=24.21.0` cho cả hai môi trường. Đặt `SKIP_DEPENDENCY_INSTALL=1` để lệnh build bên dưới tự cài từ lockfile.
 2. Ngay trong màn hình thiết lập ban đầu, dùng lệnh build dưới đây. Cloudflare cung cấp `CF_PAGES_BRANCH` và `CF_PAGES_COMMIT_SHA`. Chừa trống `APPROVED_RELEASE_SHA` tới khi chủ dự án duyệt SHA cụ thể. Kiểm tra biến Production và Preview riêng. Bước này bảo vệ cả lần build đầu tiên do Git integration khởi tạo.

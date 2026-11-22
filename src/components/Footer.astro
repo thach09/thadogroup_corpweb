@@ -18,7 +18,9 @@ const t = copy[lang];
         <div class="socials">
           {(['facebook','github'] as const).map(service => <a href={contact[service]} aria-label={service === 'facebook' ? 'Facebook' : 'GitHub'}><img src={'/icons/' + service + '.svg'} alt="" width="22" height="22" /></a>)}
         </div>
-        <div class="zalo"><span class="zalo-mark">Zalo</span><span>{contact.phone}</span>
+        <div class="zalo">
+          <a class="zalo-link" href={contact.zalo} aria-label={t.zaloLabel} title={t.zaloLabel}><span class="zalo-mark">Zalo</span></a>
+          <span>{contact.phone}</span>
           <button type="button" hidden id="copy-number" aria-label={t.copy} title={t.copy} data-number={contact.phone} data-success={t.copied} data-fallback={t.manual}><Icon name="copy" /></button>
         </div>
         <p class="feedback" role="status" id="copy-status"></p>

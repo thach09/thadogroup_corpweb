@@ -72,9 +72,11 @@ for (const locale of locales) {
         expect(dimensions!.width).toBeGreaterThanOrEqual(44);
         expect(dimensions!.height).toBeGreaterThanOrEqual(44);
       }
-      const phone = contact.getByRole('link', { name: /0354314095/ });
+      const phone = contact.getByRole('link', { name: /^0354314095/ });
+      const zaloLink = contact.getByRole('link', { name: /(Zalo|Liên hệ qua Zalo|Contact via Zalo)/i });
+      await expect(zaloLink).toHaveAttribute('href', 'https://zalo.me/0354314095');
       const copy = contact.getByRole('button', { name: /Zalo|sao chép|copy/i });
-      for (const target of [phone, copy]) {
+      for (const target of [phone, zaloLink, copy]) {
         const dimensions = await target.boundingBox();
         expect(dimensions!.width, 'Touch target width').toBeGreaterThanOrEqual(44);
         expect(dimensions!.height, 'Touch target height').toBeGreaterThanOrEqual(44);
@@ -166,6 +168,8 @@ test.describe('without JavaScript', () => {
       }
       const phone = page.locator('a[href="tel:+84354314095"]');
       await expect(phone).toBeVisible();
+      const zalo = page.locator('a[href="https://zalo.me/0354314095"]');
+      await expect(zalo).toBeVisible();
       await expect(page.locator('#contact')).toContainText('0354314095');
       await checkViewport(page);
     });

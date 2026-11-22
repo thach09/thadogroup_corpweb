@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { buildAstro } from './build-astro';
 
 const urls = {
-  Ganbarou: 'https://ganbarou.example.test/study/',
+  Ganbarou: 'https://heyganba.site/',
   Jiayou: 'https://jiayou.example.test/learn/',
 };
 
@@ -23,6 +23,23 @@ test('configured HTTPS product URLs produce direct, same-tab links in both langu
       await expect(link).toHaveAttribute('href', url);
       expect([null, '_self']).toContain(await link.getAttribute('target'));
     }
+  }
+
+  // Test the current real project state: Ganbarou is approved (https://heyganba.site/), Jiayou remains coming-soon
+  const realStateOutput = info.outputPath('ganbarou-only');
+  await buildAstro(realStateOutput, { GANBAROU_URL: 'https://heyganba.site/' });
+  for (const [index, soonText] of [['index.html', 'Sắp ra mắt'], ['en/index.html', 'Coming soon']]) {
+    const html = await readFile(join(realStateOutput, index), 'utf8');
+    await page.setContent(html);
+    const products = page.locator('#products');
+    const ganbarouArticle = products.getByRole('article').filter({ has: page.getByRole('heading', { name: 'Ganbarou' }) });
+    const ganbarouLink = ganbarouArticle.getByRole('link', { name: /Ganbarou/i });
+    await expect(ganbarouLink).toHaveAttribute('href', 'https://heyganba.site/');
+    expect([null, '_self']).toContain(await ganbarouLink.getAttribute('target'));
+
+    const jiayouArticle = products.getByRole('article').filter({ has: page.getByRole('heading', { name: 'Jiayou' }) });
+    await expect(jiayouArticle.getByText(soonText, { exact: true })).toBeVisible();
+    await expect(jiayouArticle.getByRole('link')).toHaveCount(0);
   }
 
   // A build must refuse product links that are not plain HTTPS URLs.

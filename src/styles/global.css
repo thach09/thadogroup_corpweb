@@ -89,11 +89,13 @@ footer h2 { font-size:1.75rem; letter-spacing:-.045em; margin-top:16px; font-wei
 .phone { display:inline-flex; align-items:center; min-height:44px; font-weight:700 }
 .phone:hover { color:var(--red); text-decoration:underline }
 .socials,.zalo { display:flex; align-items:center; gap:10px }
-.socials a, .zalo button { display:grid; place-items:center; width:44px; height:44px; background:white; border:1px solid var(--line); border-radius:2px }
-.socials a:hover,.zalo button:hover { background:#f9eff1; border-color:#b45c6c }
+.socials a, .zalo a, .zalo button { display:grid; place-items:center; width:44px; height:44px; background:white; border:1px solid var(--line); border-radius:2px }
+.socials a:hover, .zalo a:hover, .zalo button:hover { background:#f9eff1; border-color:#b45c6c }
 .zalo { margin-top:12px; font-size:.94rem; font-weight:650 }
+.zalo a:hover .zalo-mark { color:var(--red); border-color:var(--red) }
 .zalo-mark { border:1.5px solid currentColor; border-radius:10px 10px 10px 2px; padding:1px 3px; font-weight:800; font-size:.78rem; letter-spacing:-.05em }
 .zalo button svg { width:17px }
+.zalo button.copied { background:#ffecf0; border-color:var(--red); color:var(--red) }
 .feedback { font-size:.85rem; color:var(--muted); min-height:1.6em; margin-top:4px }
 .legal { margin-top:30px; border-top:1px solid var(--line); padding-top:16px; font-size:.78rem }
 .error-page { padding:12vh 0 }
