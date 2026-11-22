@@ -4,6 +4,13 @@ interface Props { lang: Language }
 const { lang } = Astro.props;
 ---
 <a class="brand" href={lang === 'vi' ? '/' : '/en/'} aria-label={copy[lang].home}>
-  <img src="/favicon.svg" alt="" width="38" height="38" />
-  <span>THADO <b>GROUP</b></span>
+  <img
+    src="/brand/logo-300.png"
+    srcset="/brand/logo-300.png 1x, /brand/logo.png 2x"
+    alt="THADO GROUP"
+    width="158"
+    height="40"
+    class="brand-logo"
+  />
+  <span class="sr-only">THADO GROUP</span>
 </a>
