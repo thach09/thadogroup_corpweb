@@ -13,11 +13,11 @@ Không phát hiện lỗi chặn phát hành ở phần mã nguồn và cấu h�
 | CSP | `public/_headers`; test Playwright áp dụng header và bắt `securitypolicyviolation` | `default-src 'none'`, script/style/img/font/connect chỉ `'self'`, `base-uri 'none'`, `frame-ancestors 'none'`, `form-action 'none'`; không có `unsafe-inline`/`unsafe-eval`; 0 vi phạm trên `/` và `/en/` |
 | Header phòng thủ | `curl -I` qua `wrangler pages dev` 4.166.0 | Có `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy` trên trang và asset |
 | Tài nguyên bên thứ ba | Kiểm tra mã và network của test | Không có script, font, ảnh hay analytics từ domain khác; Manrope và icon được lưu cục bộ |
-| Liên kết ngoài | `src/data/contact.ts`, test footer | Facebook và GitHub đúng URL chủ dự án cung cấp; mở cùng tab; không có `target="_blank"` nên không cần `noopener` |
-| Zalo | `Footer.astro`, `public/site.js`, test sao chép | Chưa gắn deep link khi chưa xác minh; số hiển thị dạng văn bản; nút sao chép dùng Clipboard API, có fallback `execCommand`, có thông báo qua `role="status"`; số vẫn đọc được khi tắt JS hoặc cả hai cách sao chép thất bại |
+| Liên kết ngoài | `src/data/contact.ts`, test footer | Facebook, GitHub và Zalo đúng URL đã xác nhận; mở cùng tab; không có `target="_blank"` nên không cần `noopener` |
+| Zalo | `Footer.astro`, `public/site.js`, test liên kết và sao chép | Liên kết `https://zalo.me/0354314095` dạng thẻ `<a>` native; đích desktop *Owner confirmed*; số hiển thị văn bản; nút sao chép có Clipboard API và fallback `execCommand`, thông báo `role="status"` |
 | Số điện thoại | `tel:+84354314095` | Đúng số đã cung cấp; không suy ra email hoặc thông tin khác |
 | Bí mật và dữ liệu | `git status`, `.gitignore`, `.env.example` | Không commit `.env`, token hay dữ liệu riêng; `.env*` bị bỏ qua, chỉ mẫu placeholder được thêm |
-| Dependency | `package.json`, lockfile, `npm audit` | Phiên bản ghim chính xác; lockfile được commit; audit 0 lỗ hổng tại thời điểm kiểm tra; Dependabot cấu hình npm và GitHub Actions hằng tuần |
+| Dependency | `package.json`, lockfile, `npm audit`, dependabot.yml | Phiên bản ghim chính xác; audit 0 lỗ hổng; Dependabot cấu hình npm & Actions hằng tuần, ignore major version của `typescript` để ngăn xung đột peer dependency với `@astrojs/check` |
 | Mã nguy hiểm | Rà soát `src/`, `public/` | Không `eval`, `innerHTML`, `document.write`, script động, iframe hay xử lý dữ liệu người dùng |
 | Build production | `astro.config.mjs`, test production | Bản preview có `noindex`; bản production bắt buộc `SITE_URL` đúng origin, bỏ `noindex`, robots cho phép index và sitemap dùng domain đã duyệt |
 | CI | `.github/workflows/ci.yml`; GitHub Actions run 45034705226 | Quyền `contents: read`; checkout không giữ credentials; action ghim theo SHA; không có token hosting; workflow xanh trên draft PR #1 |

@@ -47,9 +47,9 @@ Trong Bash, dùng `SITE_ENV=production SITE_URL=https://thadocorp.com npm run bu
 | Màu, kiểu chữ, breakpoint và chuyển động | `src/styles/global.css` |
 | Menu mobile, sao chép số và hiệu ứng cuộn | `public/site.js` |
 
-Điền URL HTTPS đã xác nhận vào `GANBAROU_URL` hoặc `JIAYOU_URL` trong môi trường build hoặc tệp `.env.local` (xem mẫu `.env.example`) rồi build lại. Mỗi biến chỉ tác động đến một sản phẩm ở cả hai ngôn ngữ. Để trống biến sẽ hiển thị “Sắp ra mắt” / “Coming soon”. Website từ chối URL dùng giao thức khác HTTPS hoặc chứa thông tin đăng nhập. Khi có URL, CTA là link native cùng tab và mang tên sản phẩm.
+Điền URL HTTPS đã xác nhận vào `GANBAROU_URL` (đã xác nhận: `https://heyganba.site/`) hoặc `JIAYOU_URL` trong môi trường build hoặc tệp `.env.local` (xem mẫu `.env.example`) rồi build lại. Mỗi biến chỉ tác động đến một sản phẩm ở cả hai ngôn ngữ. Để trống biến sẽ hiển thị “Sắp ra mắt” / “Coming soon”. Website từ chối URL dùng giao thức khác HTTPS hoặc chứa thông tin đăng nhập. Khi có URL, CTA là link native cùng tab và mang tên sản phẩm.
 
-Footer giữ số Zalo ở dạng văn bản và cung cấp nút sao chép khi có JavaScript. Nút dùng Clipboard API, tự chuyển sang `execCommand` khi API không khả dụng và thông báo kết quả qua `role="status"`. Nếu cả hai cách thất bại, số vẫn đọc được để sao chép thủ công. Deep link Zalo chỉ được thêm sau khi xác minh trên thiết bị thật. Các icon Facebook, GitHub dùng Bootstrap Icons (MIT), phông Manrope dùng SIL Open Font License. Bản quyền được phân phối cùng tài nguyên tại `public/icons/`.
+Footer cung cấp liên kết Zalo dạng thẻ `<a>` native (`https://zalo.me/0354314095`), số điện thoại dạng văn bản và nút sao chép dự phòng. Nút dùng Clipboard API, tự chuyển sang `execCommand` khi API không khả dụng, đổi màu nút trong 2 giây và thông báo kết quả qua `role="status"`. Khi tắt JavaScript, cả liên kết và số điện thoại vẫn đọc và sử dụng được. Các icon Facebook, GitHub dùng Bootstrap Icons (MIT), phông Manrope dùng SIL Open Font License. Bản quyền được phân phối cùng tài nguyên tại `public/icons/`.
 
 ## Duyệt và phát hành
 

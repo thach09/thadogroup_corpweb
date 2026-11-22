@@ -3,5 +3,6 @@ export const contact = {
   phone: '0354314095',
   tel: 'tel:+84354314095',
   facebook: 'https://www.facebook.com/hcaht.09?locale=vi_VN',
-  github: 'https://github.com/thach09'
+  github: 'https://github.com/thach09',
+  zalo: 'https://zalo.me/0354314095'
 } as const;

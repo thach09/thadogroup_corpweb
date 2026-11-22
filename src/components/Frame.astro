@@ -16,6 +16,13 @@ const en = new URL('/en/', Astro.site).href;
     <meta name="theme-color" content="#102447" />
     <title>{missing ? '404 | THADO GROUP' : t.title}</title>
     <meta name="description" content={missing ? 'Trang không tồn tại · Page not found' : t.description} />
+    <meta property="og:site_name" content="THADO GROUP" />
+    <meta property="og:title" content={missing ? '404 | THADO GROUP' : t.title} />
+    <meta property="og:description" content={missing ? 'Trang không tồn tại · Page not found' : t.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={lang === 'vi' ? vi : en} />
+    <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
     {(!import.meta.env.PUBLIC_INDEX_SITE || missing) && <meta name="robots" content="noindex, nofollow" />}
     {!missing && <>
       <link rel="canonical" href={lang === 'vi' ? vi : en} />

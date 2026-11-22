@@ -72,6 +72,10 @@ if (copy && feedback) {
   copy.addEventListener('click', async () => {
     const copied = await writeNumber(copy.dataset.number);
     announce(copied ? copy.dataset.success : copy.dataset.fallback);
+    if (copied) {
+      copy.classList.add('copied');
+      window.setTimeout(() => { copy.classList.remove('copied'); }, 2000);
+    }
   });
 }
 

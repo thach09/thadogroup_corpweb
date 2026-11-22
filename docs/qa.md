@@ -1,6 +1,6 @@
 # Nghiệm thu website THADO GROUP
 
-**Ngày 22/11/2026.** Báo cáo ghi kết quả trên nhánh `feat/corporate-website-v1`, commit mã nguồn và QA `5cb592895fcc256963b2dfa30fd531256612dba9`. Commit tài liệu sau đó chỉ cập nhật báo cáo, không đổi mã nguồn. SHA cũng được ghi trong [`docs/handover.md`](handover.md) và PR. Chưa có review độc lập: cùng một agent thực hiện phát triển, kiểm thử và rà soát bảo mật.
+**Ngày 22/11/2026.** Báo cáo ghi kết quả trên nhánh sửa lỗi `fix/post-m0-audit-and-validation`, sau khi PR #1 (`feat/corporate-website-v1`) đã merge thành công vào `main` tại SHA `cb95c5ac3730c80b81f1c1c5a33825a60c931cb9`. Chưa có review độc lập: cùng một agent kỹ thuật thực hiện tuần tự việc phát triển, kiểm thử và rà soát bảo mật.
 
 ## Môi trường đo
 
@@ -20,29 +20,29 @@ Bản preview được build bằng `npm run build` vào `dist/` (không đặt 
 
 ## Ma trận kiểm thử
 
-| Môi trường | Kích thước CSS | Các hành trình chính |
-| --- | --- | --- |
-| Chromium desktop | 1440 × 960 | VI/EN, menu, sản phẩm, liên hệ, focus, 404, axe |
-| Chromium mobile | 360 × 800 | Bố cục hẹp, thao tác chạm, menu bàn phím và Escape, VI/EN, axe |
-| WebKit tablet | 768 × 1024 | Bố cục trung gian, điều hướng, sản phẩm, footer VI/EN, axe |
-| WebKit mobile | 390 × 844 | Menu, chuyển ngôn ngữ, sản phẩm, liên hệ, JavaScript tắt, axe |
+| Môi trường | Kích thước CSS | Các hành trình chính | Trạng thái |
+| --- | --- | --- | :---: |
+| Chromium desktop | 1440 × 960 | VI/EN, menu, sản phẩm, liên hệ, focus, 404, axe, CSP | Locally tested |
+| Chromium mobile | 360 × 800 | Bố cục hẹp, chạm, menu bàn phím và Escape, VI/EN, axe | Locally tested |
+| Chromium narrow | 320 × 640 | Màn hình cực hẹp 320 px, kiểm tra không tràn ngang, axe | Locally tested |
+| WebKit tablet | 768 × 1024 | Bố cục trung gian, điều hướng, sản phẩm, footer VI/EN, axe | Locally tested |
+| WebKit mobile | 390 × 844 | Menu, chuyển ngôn ngữ, sản phẩm, liên hệ, JS tắt, axe | Locally tested |
 
-Playwright chạy trên `dist/`. Bộ test đối chiếu canonical, hreflang, đích liên hệ, CTA và trạng thái sản phẩm. Bản build tạm dùng URL `.test` để kiểm tra link sản phẩm ở cả hai ngôn ngữ, từ chối URL HTTP hoặc URL có thông tin đăng nhập. Một bản production tạm kiểm tra `robots.txt`, sitemap và việc bỏ `noindex`. Test header đọc `dist/_headers`, áp dụng CSP như Pages và theo dõi `securitypolicyviolation`.
+Playwright chạy trên `dist/`. Bộ test đối chiếu canonical, hreflang, đích liên hệ, CTA và trạng thái sản phẩm. Bản build tạm dùng URL `.test` và URL thực tế Ganbarou `https://heyganba.site/` để kiểm tra link sản phẩm ở cả hai ngôn ngữ, từ chối URL HTTP hoặc URL có thông tin đăng nhập. Một bản production tạm kiểm tra `robots.txt`, sitemap và việc bỏ `noindex`. Test header đọc `dist/_headers`, áp dụng CSP như Pages và theo dõi `securitypolicyviolation`.
 
 ## Kết quả tự động
 
-| Lệnh hoặc bộ kiểm tra | Kết quả |
-| --- | --- |
-| `npm run check` | 0 lỗi, 0 cảnh báo, 0 gợi ý trên 17 tệp |
-| `npm run build` | 3 trang, `robots.txt`, `sitemap.xml`; exit 0 |
-| GitHub Actions | **Website CI** trên draft PR #1, run 45034705226: success (npm ci, check, build, Playwright) |
-| `npx playwright test` | 60 test: 47 pass, 13 skip có chủ đích, 0 fail |
-| axe (`wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa`) | 0 vi phạm trên 4 cấu hình, cả VI và EN |
-| `npm audit` | 0 lỗ hổng (info/low/moderate/high/critical = 0) |
-| Build với URL sản phẩm HTTPS | Link native, cùng tab, đúng URL ở cả hai ngôn ngữ |
-| Build với URL HTTP hoặc URL có credentials | Build thất bại, exit 1 |
-| Production build với `SITE_URL` sai | Build thất bại, exit 1 |
-| CSP và header | Đủ directive, không có `unsafe-inline`/`unsafe-eval`, không có vi phạm |
+| Lệnh hoặc bộ kiểm tra | Kết quả | Ghi chú / Trạng thái |
+| --- | --- | --- |
+| `npm run check` | 0 lỗi, 0 cảnh báo, 0 gợi ý trên 17 tệp | Verified |
+| `npm run build` | 3 trang, `robots.txt`, `sitemap.xml`; exit 0 | Verified |
+| `npx playwright test` | 75 test: 59 pass, 16 skip có chủ đích, 0 fail | Verified |
+| axe (`wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa`) | 0 vi phạm trên 5 cấu hình viewport, cả VI và EN | Locally tested |
+| `npm audit` | 0 lỗ hổng (info/low/moderate/high/critical = 0) | Verified |
+| Build với URL Ganbarou `https://heyganba.site/` | Link native, cùng tab, nhãn rõ ràng; Jiayou hiển thị "Sắp ra mắt" | Verified |
+| Build với URL HTTP hoặc URL có credentials | Build thất bại, exit 1 | Verified |
+| Production build với `SITE_URL` sai | Build thất bại, exit 1 | Verified |
+| CSP và header | Đủ directive, không có `unsafe-inline`/`unsafe-eval`, không có vi phạm | Locally tested |
 
 Các test bị skip là chủ đích theo viewport: menu thu gọn không tồn tại ở desktop/tablet, test mạng chậm chỉ chạy trên Chromium mobile, test build tĩnh chỉ chạy một lần trên Chromium desktop.
 
@@ -50,30 +50,36 @@ Các test bị skip là chủ đích theo viewport: menu thu gọn không tồn 
 
 Đo trên bản production tại `http://127.0.0.1:8792/`, form factor mobile, throttling mô phỏng (Lighthouse mặc định):
 
-| Hạng mục | Điểm |
-| --- | --- |
-| Performance | 100 |
-| Accessibility | 100 |
-| Best Practices | 100 |
-| SEO | 100 |
-| FCP / LCP / TBT / CLS / Speed Index | 0,8 s / 0,8 s / 0 ms / 0,047 / 0,8 s |
-
-Bản preview đạt Performance 100, Accessibility 100, Best Practices 100 và SEO 69. Điểm SEO thấp hơn là do `noindex` có chủ đích; bản production không có `noindex` và đạt 100. Đây là số đo cục bộ với throttling mô phỏng, không phải dữ liệu thực địa.
-
-## Kiểm tra thủ công và bán tự động
-
-| Hạng mục | Cách kiểm tra | Kết quả |
+| Hạng mục | Điểm | Ghi chú |
 | --- | --- | --- |
-| Menu mobile bằng bàn phím | `Enter`, `Tab`, `Escape`, chọn mục | Mở/đóng đúng `aria-expanded`, Escape trả focus về nút, chọn mục đóng menu |
-| Thứ tự đọc và CTA | Hero → sản phẩm ở 360 px và desktop | CTA chính tới `#products`; nội dung sản phẩm vào viewport |
-| Chuyển ngôn ngữ | Link VI/EN trên header | Đúng `/` và `/en/`, giữ nguyên anchor khi quay lại |
-| Focus | Tab qua link, nút, icon | Outline 3 px `#176eb1`, viền trắng 2 px; không phụ thuộc hover |
-| Reduced motion | `prefers-reduced-motion: reduce` | Không animation, không stagger, `scroll-behavior: auto` |
-| JavaScript tắt | Context Playwright tắt JS | H1, CTA, sản phẩm, số điện thoại và số Zalo vẫn đọc được |
-| Tương phản | Tính theo màu thực tế | Navy/white 15,38:1; đỏ/white 5,78:1; muted/white 6,18:1; chữ sản phẩm 9,53:1; focus trên trắng 5,38:1; trắng/navy 15,38:1 |
-| 404 | Đường dẫn không tồn tại | HTTP 404, nhận diện THADO, link về trang chủ hoạt động |
-| Header trên host tĩnh | `curl -I` qua `wrangler pages dev` | CSP, HSTS, nosniff, DENY, Referrer-Policy, Permissions-Policy có mặt trên `/` và asset |
-| Trình duyệt thực trên điện thoại | Thiết bị thật | **Chưa thực hiện**; mới kiểm tra Chromium/WebKit mô phỏng |
+| Performance | 100 | Số đo cục bộ mô phỏng (Locally tested) |
+| Accessibility | 100 | Số đo cục bộ mô phỏng (Locally tested) |
+| Best Practices | 100 | Số đo cục bộ mô phỏng (Locally tested) |
+| SEO | 100 | Số đo cục bộ mô phỏng (Locally tested) |
+| FCP / LCP / TBT / CLS / Speed Index | 0,8 s / 0,8 s / 0 ms / 0,047 / 0,8 s | Số đo cục bộ; không thay thế dữ liệu thực địa RUM |
+
+Bản preview đạt Performance 100, Accessibility 100, Best Practices 100 và SEO 69. Điểm SEO thấp hơn là do `noindex` có chủ đích; bản production không có `noindex` và đạt 100.
+
+## Kiểm tra chức năng và trải nghiệm
+
+| Hạng mục | Cách kiểm tra | Kết quả | Trạng thái |
+| --- | --- | --- | :---: |
+| Menu mobile bằng bàn phím | `Enter`, `Tab`, `Escape`, chọn mục | Mở/đóng đúng `aria-expanded`, Escape trả focus về nút, chọn mục đóng menu | Locally tested |
+| Thứ tự đọc và CTA | Hero → sản phẩm ở 320 px, 360 px và desktop | CTA chính tới `#products`; nội dung sản phẩm vào viewport | Locally tested |
+| Chuyển ngôn ngữ | Link VI/EN trên header | Đúng `/` và `/en/`, cập nhật thẻ lang và canonical | Locally tested |
+| Focus | Tab qua link, nút, icon | Outline 3 px `#176eb1`, viền trắng 2 px; không phụ thuộc hover | Locally tested |
+| Reduced motion | `prefers-reduced-motion: reduce` | Không animation, không stagger, `scroll-behavior: auto` | Locally tested |
+| JavaScript tắt | Context Playwright tắt JS | H1, CTA, sản phẩm, số điện thoại, Zalo link vẫn đọc và click được | Locally tested |
+| Không tràn ngang (320px) | Check viewport Playwright tại 320 × 640 | `scrollWidth <= clientWidth`, không cuộn ngang ở 320px | Locally tested |
+| Tương phản | Tính theo màu thực tế | Navy/white 15,38:1; đỏ/white 5,78:1; muted/white 6,18:1; chữ sản phẩm 9,53:1 | Locally tested |
+| Liên kết Zalo desktop | Mở trực tiếp `https://zalo.me/0354314095` trên trình duyệt | Mở đúng trang Zalo hồ sơ "Thiet Thach", có nhắn tin & QR | **Owner confirmed** |
+| Liên kết Zalo trong code | Thẻ `<a>` native, accessible name "Liên hệ qua Zalo" / "Contact via Zalo" | Nhấn mở trang Zalo, không chạm nút copy, vùng bấm 44x44px | Locally tested |
+| Sao chép số Zalo | Nút copy, Clipboard API + execCommand | Phản hồi thông báo trực quan & `role="status"` cho screen reader | Locally tested |
+| Mở app Zalo trên điện thoại thật | Thiết bị thật có cài app Zalo | Chưa kiểm nghiệm thực tế trên mobile | **Pending** |
+| URL Ganbarou | `https://heyganba.site/` | Chủ dự án cung cấp; test build ra link native cùng tab | **Owner provided** |
+| 404 | Đường dẫn không tồn tại | HTTP 404, nhận diện THADO, link về trang chủ hoạt động | Locally tested |
+| Header trên host tĩnh | `curl -I` qua `wrangler pages dev` | CSP, HSTS, nosniff, DENY, Referrer-Policy, Permissions-Policy đầy đủ | Locally tested |
+| Review độc lập | Đơn vị / Chuyên viên bên ngoài | Cùng một agent kỹ thuật tự kiểm tra tuần tự | **Chưa có** |
 
 ## Ảnh giao diện
 

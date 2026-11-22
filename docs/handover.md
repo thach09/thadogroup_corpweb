@@ -6,13 +6,12 @@
 
 | Mục | Giá trị |
 | --- | --- |
-| Nhánh | `feat/corporate-website-v1` |
-| Commit xuất phát | `3e110374c39dd00201194b7986d97fc9ed39679c` (`main`, chỉ có `README.md`) |
-| Commit mã nguồn và QA | `5cb592895fcc256963b2dfa30fd531256612dba9` — commit tài liệu kế tiếp chỉ cập nhật mục này |
-| Commit tài liệu | Xem `git log -1 --format=%H`; không thay đổi mã nguồn hay build |
+| Nhánh sửa lỗi | `fix/post-m0-audit-and-validation` |
+| Nhánh chính | `main` |
+| Commit merge PR #1 trên main | `cb95c5ac3730c80b81f1c1c5a33825a60c931cb9` |
+| Baseline lịch sử | `3e110374c39dd00201194b7986d97fc9ed39679c` (`main` ban đầu, chỉ có `README.md`) |
 | Remote | `origin` = https://github.com/thach09/thadogroup_corpweb |
-| Draft PR | [#1](https://github.com/thach09/thadogroup_corpweb/pull/1) — draft, chưa merge, chờ chủ dự án duyệt |
-| CI | **Website CI** run [45034705226](https://github.com/thach09/thadogroup_corpweb/actions/runs/45034705226) — success trên commit `4ae38104ab5a7af08da276b0ff15dd33a2562f01`; commit tài liệu sau đó chỉ thay đổi docs |
+| PR trước đó | [#1](https://github.com/thach09/thadogroup_corpweb/pull/1) — đã merge thành công ngày 22/11/2026 |
 | Preview công khai | **Chưa có** — môi trường chưa đăng nhập Cloudflare Pages |
 | Domain production | **Chưa gắn** — `thadocorp.com` là domain dự kiến |
 | Trạng thái production | **Chưa triển khai**; không có DNS hoặc traffic nào bị thay đổi |
@@ -34,17 +33,20 @@ Muốn xem với header như Cloudflare Pages, dùng Wrangler:
 npx wrangler pages dev dist --ip 127.0.0.1 --port 8791
 ```
 
-## Phạm vi đã bàn giao
+## Phạm vi đã hoàn thiện và bàn giao
 
 - Landing page tiếng Việt `/` và tiếng Anh `/en/`, cùng dữ liệu có kiểu.
 - Các khối Hero, Lĩnh vực, Giới thiệu, Sản phẩm THADO EDU, Footer/Liên hệ.
-- Ganbarou và Jiayou có trạng thái “Sắp ra mắt” hoặc CTA HTTPS tùy cấu hình.
-- Footer: Thach Do, `0354314095`, `tel:+84354314095`, Facebook, GitHub, Zalo dạng số và nút sao chép.
-- Trang 404 theo nhận diện, menu mobile dùng bàn phím/Escape, bộ chuyển VI–EN.
-- Animation vào một lần, reduced motion, nội dung hiển thị khi tắt JavaScript.
+- **Ganbarou:** Đã có URL chính thức `https://heyganba.site/` (*Owner provided*); tự động render link native cùng tab khi có cấu hình, hoặc fallback "Sắp ra mắt" khi để trống.
+- **Jiayou:** Trạng thái "Sắp ra mắt" / "Coming soon".
+- **Footer:** Thach Do, `0354314095`, `tel:+84354314095`, Facebook, GitHub, liên kết native Zalo `https://zalo.me/0354314095` (*Owner confirmed* trên desktop) và nút sao chép dự phòng.
+- **Trang 404** theo nhận diện, menu mobile dùng bàn phím/Escape, bộ chuyển VI–EN.
+- **Metadata:** Đầy đủ Open Graph (`og:title`, `og:description`, `og:url`, `og:type`) và `twitter:card`.
+- **Responsive:** Đã kiểm thử tự động trên cả 5 viewport (1440px, 1024px, 844px, 800px, 320px). Không tràn ngang ở 320 px.
+- **Animation:** Vào một lần, reduced motion, nội dung hiển thị khi tắt JavaScript.
 - `robots.txt`, sitemap, canonical, hreflang, noindex cho preview, build production có kiểm soát origin.
 - `public/_headers` với CSP và các header phòng thủ.
-- CI GitHub Actions, Dependabot, mẫu PR, tài liệu QA/bảo mật/phát hành.
+- CI GitHub Actions, Dependabot (đã chặn xung đột TypeScript major), tài liệu QA/bảo mật/phát hành.
 
 ## Vị trí cập nhật
 
@@ -52,43 +54,44 @@ npx wrangler pages dev dist --ip 127.0.0.1 --port 8791
 | --- | --- |
 | Tiêu đề, mô tả, menu, toàn bộ bản dịch | `src/data/content.ts` |
 | Tên sản phẩm, trạng thái, URL | `src/data/products.ts` + biến môi trường |
-| Người sáng lập, điện thoại, Facebook, GitHub | `src/data/contact.ts` |
+| Người sáng lập, điện thoại, Facebook, GitHub, Zalo | `src/data/contact.ts` |
 | Cấu trúc header, hero, sản phẩm, footer, 404 | `src/components/`, `src/pages/` |
 | Màu, kiểu chữ, breakpoint, animation, focus | `src/styles/global.css` |
 | Menu mobile, sao chép Zalo, IntersectionObserver | `public/site.js` |
 | Header bảo mật | `public/_headers` |
 | Domain, noindex, sitemap | `astro.config.mjs`, `src/pages/robots.txt.ts`, `src/pages/sitemap.xml.ts` |
+| Quản lý cập nhật dependencies | `.github/dependabot.yml` |
 
 ### Cập nhật URL sản phẩm
 
 Sao chép `.env.example` thành `.env.local` (không commit), điền URL HTTPS đã được chủ dự án xác nhận rồi build lại:
 
 ```ini
-GANBAROU_URL=https://...
-JIAYOU_URL=https://...
+GANBAROU_URL=https://heyganba.site/
+# JIAYOU_URL=https://...
 ```
 
 Để trống một biến thì sản phẩm tương ứng hiển thị “Sắp ra mắt” / “Coming soon”. Build sẽ dừng nếu URL không phải HTTPS hoặc chứa thông tin đăng nhập. Trên Cloudflare Pages, đặt cùng biến trong môi trường build. Hai ngôn ngữ dùng chung dữ liệu URL.
 
 ### Cập nhật Zalo
 
-Hiện chưa gắn deep link. Chỉ thay hành vi trong `src/components/Footer.astro` và `public/site.js` sau khi xác minh đích mở đúng tài khoản trên thiết bị thật. Giữ số đọc được khi JavaScript tắt và giữ thông báo qua `role="status"`.
+Liên kết Zalo đã trỏ trực tiếp tới `https://zalo.me/0354314095` dạng thẻ `<a>` native với accessible name "Liên hệ qua Zalo" / "Contact via Zalo" và vùng bấm đạt tối thiểu 44 × 44 px. Nút sao chép bên cạnh dùng Clipboard API (fallback `execCommand`) thông báo qua `role="status"` và đổi màu phớt đỏ trong 2 giây để tạo visual feedback.
 
 ## Bằng chứng kiểm tra
 
-- [QA chi tiết](qa.md): môi trường, 60 test Playwright, axe, Lighthouse, tương phản, ảnh.
+- [QA chi tiết](qa.md): môi trường, 75 test Playwright (59 pass, 16 skip có chủ đích, 0 fail), axe 0 vi phạm trên 5 viewport, Lighthouse, tương phản, ảnh.
 - [Bảo mật](security.md): CSP, header, dependency, quyền CI, rủi ro còn lại.
 - [Trạng thái milestone](status.md): M0–M3, backlog và phương án phát hành.
 - [Phát hành, DNS, TLS, quay lui](release.md).
 
-Tóm tắt lần chạy cuối: `npm run check` sạch; `npm run build` thành công; Playwright 47 pass, 13 skip có chủ đích, 0 fail; axe 0 vi phạm; `npm audit` 0 lỗ hổng; Lighthouse mobile production 100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO.
+Tóm tắt lần chạy cuối: `npm run check` sạch (0 errors); `npm run build` thành công; Playwright 59 pass, 16 skip có chủ đích, 0 fail; axe 0 vi phạm; `npm audit` 0 lỗ hổng; Lighthouse mobile production 100 Performance / 100 Accessibility / 100 Best Practices / 100 SEO.
 
 ## Điều kiện còn chờ trước production
 
-1. Chủ dự án cung cấp hoặc xác nhận URL Ganbarou và Jiayou, hoặc chấp thuận phát hành thu gọn với trạng thái tĩnh.
-2. Xác minh Zalo trên thiết bị thật (hoặc giữ nguyên nút sao chép).
-3. Cấp quyền Cloudflare Pages; quyết định bật bảo vệ `main` và Dependabot alerts/security updates (hiện đang tắt). Secret scanning và push protection đã bật.
-4. Duyệt M0/nội dung cuối và SHA phát hành; đặt `APPROVED_RELEASE_SHA` đúng SHA.
+1. Quyết định phát hành của chủ dự án: Phát hành Phương án A (Ganbarou mở link `https://heyganba.site/`, Jiayou "Sắp ra mắt") hay Phương án B (cả 2 "Sắp ra mắt").
+2. Kiểm nghiệm việc mở ứng dụng Zalo trên điện thoại thật có cài app Zalo.
+3. Cấp quyền Cloudflare Pages; bật quy tắc bảo vệ `main` và Dependabot alerts/security updates trên GitHub Settings.
+4. Duyệt SHA phát hành; đặt `APPROVED_RELEASE_SHA` đúng SHA trên Cloudflare Pages.
 5. Kiểm kê DNS, bảo toàn email, kiểm tra TLS và duyệt thời điểm chuyển lưu lượng cho `thadocorp.com`.
 6. Chạy lại QA trên đúng SHA phát hành, kiểm tra thiết bị thật và header trên host thật.
 7. Review độc lập của Tester và Security trước khi công bố chính thức.
