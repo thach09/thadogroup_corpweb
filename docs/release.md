@@ -1,5 +1,17 @@
 # Phát hành THADO GROUP
 
+## Kế hoạch hiện tại ngày 23/11/2026
+
+Đang chuẩn bị self-host trên Arch Linux, tái sử dụng hạ tầng HTTPS hiện có sau khi chủ server duyệt routing. Đã SSH khảo sát chỉ đọc. Template staging và release gate thủ công theo SHA, checksum, atomic switch, rollback nằm trong [self-hosting.md](self-hosting.md). Cấu hình Compose đã được parse local, chưa chạy nginx -t hoặc container staging vì chưa có quyền thay đổi server.
+
+Ruleset Protect Main Branch hiện Active và bắt buộc Build and browser tests từ GitHub Actions 15368. Main đã fetch tại 558dfe2d2259a5863d6e44b977251b62dd9c1ae3, PR #7–#9 đã merge. Zalo điện thoại được chủ dự án xác nhận. Domain chưa chuyển, staging và production chưa được triển khai trong đợt này.
+
+APPROVED_RELEASE_SHA trong hướng dẫn Cloudflare bên dưới chỉ có hiệu lực khi quản trị viên cài đúng lệnh build. Nó chưa bảo vệ self-host. Phương án tự host dùng phê duyệt SHA trong PR, checkout sạch đúng SHA, build/test, artifact manifest + checksum đối chiếu kênh tin cậy, deploy thủ công và atomic switch.
+
+## Phương án Cloudflare và lịch sử ngày 22/11/2026
+
+Phần dưới là phương án thay thế và dữ liệu lịch sử. Các nhận định main chưa bảo vệ, mobile chưa xác nhận và SHA cũ được thay thế bởi thông tin hiện tại phía trên.
+
 ## Trạng thái repo
 
 Ngày 22/11/2026, PR triển khai ban đầu #1 (`feat/corporate-website-v1`) và PR #6 (`fix/post-m0-audit-and-validation`) đã được merge thành công vào `main` tại SHA `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881`. Nhánh `fix/final-pre-release-stabilization` thực hiện đợt rà soát ổn định cuối cùng trước khi bàn giao cho chủ dự án nghiệm thu.

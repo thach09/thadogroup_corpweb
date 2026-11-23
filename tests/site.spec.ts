@@ -61,6 +61,9 @@ for (const locale of locales) {
       expect(await links.count() + await statuses.count()).toBe(2);
       const contact = page.locator('#contact');
       await expect(contact).toContainText('Thach Do');
+      const email = contact.getByRole('link', { name: 'thietthachdo@gmail.com' });
+      await expect(email).toHaveAttribute('href', 'mailto:thietthachdo@gmail.com');
+      expect((await email.boundingBox())!.height).toBeGreaterThanOrEqual(44);
       await expect(contact.getByRole('link', { name: /0354314095/ })).toHaveAttribute('href', 'tel:+84354314095');
       for (const [service, href] of [
         ['Facebook', 'https://www.facebook.com/hcaht.09?locale=vi_VN'],

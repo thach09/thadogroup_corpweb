@@ -45,15 +45,15 @@ Trong Bash, dùng `SITE_ENV=production SITE_URL=https://thadocorp.com npm run bu
 | Số điện thoại, thông tin người sáng lập và mạng xã hội | `src/data/contact.ts` |
 | Cấu trúc trang và từng khối | `src/components/` |
 | Màu, kiểu chữ, breakpoint và chuyển động | `src/styles/global.css` |
-| Menu mobile, sao chép số và hiệu ứng cuộn | `public/site.js` |
+| Menu mobile và hiệu ứng cuộn | `public/site.js` |
 
 Điền URL HTTPS đã xác nhận vào `GANBAROU_URL` (đã xác nhận: `https://heyganba.site/`) hoặc `JIAYOU_URL` trong môi trường build hoặc tệp `.env.local` (xem mẫu `.env.example`) rồi build lại. Mỗi biến chỉ tác động đến một sản phẩm ở cả hai ngôn ngữ. Để trống biến sẽ hiển thị “Sắp ra mắt” / “Coming soon”. Website từ chối URL dùng giao thức khác HTTPS hoặc chứa thông tin đăng nhập. Khi có URL, CTA là link native cùng tab và mang tên sản phẩm.
 
-Footer cung cấp liên kết Zalo dạng thẻ `<a>` native (`https://zalo.me/0354314095`), số điện thoại dạng văn bản và nút sao chép dự phòng. Nút dùng Clipboard API, tự chuyển sang `execCommand` khi API không khả dụng, đổi màu nút trong 2 giây và thông báo kết quả qua `role="status"`. Khi tắt JavaScript, cả liên kết và số điện thoại vẫn đọc và sử dụng được. Các icon Facebook, GitHub dùng Bootstrap Icons (MIT), phông Manrope dùng SIL Open Font License. Bản quyền được phân phối cùng tài nguyên tại `public/icons/`.
+Footer có Gmail `thietthachdo@gmail.com` với liên kết mailto, số điện thoại và ba icon Facebook, GitHub, Zalo. Zalo dẫn tới `https://zalo.me/0354314095`. Các liên kết native dùng được khi tắt JavaScript. Chủ dự án đã xác nhận Zalo trên điện thoại. Các icon Facebook, GitHub dùng Bootstrap Icons (MIT), phông Manrope dùng SIL Open Font License. Bản quyền được phân phối cùng tài nguyên tại `public/icons/`.
 
 ## Duyệt và phát hành
 
-Bản mặc định dùng `noindex` và chặn crawler trong robots.txt. Production cần cấu hình riêng theo [hướng dẫn phát hành, DNS và quay lui](docs/release.md). Sitemap và URL chuẩn hiện dùng domain dự kiến `thadocorp.com`. Bản preview trên máy phục vụ kiểm tra giao diện, Cloudflare Pages áp dụng header từ `public/_headers` khi triển khai.
+Bản mặc định dùng `noindex` và chặn crawler trong robots.txt. Production cần cấu hình riêng theo [hướng dẫn phát hành, DNS và quay lui](docs/release.md). Sitemap và URL chuẩn dùng domain dự kiến `thadocorp.com`. [Khảo sát Arch Linux và phương án self-host](docs/self-hosting.md) có cấu hình staging riêng. Cloudflare Pages áp dụng `public/_headers`, Nginx cần cấu hình header trong `deploy/nginx.conf`. Staging và production đang chờ phê duyệt.
 
 ## Tài liệu bàn giao
 

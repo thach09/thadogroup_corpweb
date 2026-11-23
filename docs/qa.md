@@ -1,5 +1,30 @@
 # Nghiệm thu website THADO GROUP
 
+## Current verification cho nhánh bàn giao
+
+Ngày 23/11/2026, nền main 558dfe2, nhánh fix/final-security-and-hosting-readiness. Chạy lại npm ci, npm run check, npm run build, npm run test:e2e và npm audit. Build set GANBAROU_URL=https://heyganba.site/ và JIAYOU_URL trống. Check 0 lỗi/cảnh báo, Playwright 69 pass / 16 skip / 0 fail trong 30 giây, audit 0 lỗ hổng.
+
+Năm cấu hình Chromium desktop 1440, mobile 360, narrow 320 và WebKit tablet 768, mobile 390 đều chạy. Kiểm thử có axe, mailto/contact, keyboard, reduced motion, thiếu IntersectionObserver, JavaScript-off, URL validation và build production/noindex. Zalo điện thoại là Owner confirmed theo yêu cầu của chủ dự án, không phải kết quả giả lập.
+
+Compose staging qua kiểm tra config local. Chưa có Docker daemon local để chạy Nginx container, chưa triển khai lên server read-only. Nginx runtime, HTTPS, cache, rollback và toàn bộ acceptance trên staging thật là PENDING. Remote CI được theo dõi trên đúng SHA trong Draft PR.
+
+## Historical QA và bằng chứng giao diện trước đó
+
+## Kiểm tra cập nhật ngày 23/11/2026
+
+Thay đổi trên nền commit `1b53116` tại checkout lồng đang phục vụ cổng 4321. Đã bổ sung Gmail, sửa hiệu ứng cuộn và reduced motion.
+
+- `npm run check` có 0 lỗi và cảnh báo. Build thành công.
+- `npm run test:e2e` có 69 pass, 16 skip theo phạm vi cấu hình, 0 fail, tổng 85 ca trong 33,1 giây.
+- Chromium desktop/mobile/320 px và WebKit tablet/mobile đã kiểm tra Gmail mailto, điều hướng, footer và axe. Các lượt axe ghi nhận 0 vi phạm.
+- Tests mới kiểm tra focus bỏ animation ngay, thiếu IntersectionObserver vẫn đọc được nội dung và thay đổi reduced motion khi trang đang mở.
+- Kiểm thử có sẵn bao phủ tắt JavaScript, kết nối chậm, URL sản phẩm và build production/preview.
+- Đã xem ảnh Contact tiếng Anh trên desktop và tiếng Việt ở 320 px, Gmail vừa chiều rộng. [Ảnh desktop](qa/contact-desktop.png), [ảnh mobile](qa/contact-mobile.png)
+- Bản preview cuối được build với `GANBAROU_URL=https://heyganba.site/` theo URL đã ghi nhận ở .env.example. Jiayou giữ trạng thái sắp ra mắt.
+- Header được kiểm tra thêm trên Wrangler Pages. Xem kết quả và giới hạn tại [báo cáo bảo mật](security.md).
+
+Thiết bị điện thoại thật và host production chưa được kiểm tra trong lần cập nhật này. Các phần dưới giữ lịch sử nghiệm thu trước đó.
+
 **Ngày 22/11/2026.** Báo cáo ghi kết quả trên nhánh `fix/final-pre-release-stabilization`, kế thừa sau khi PR #1 (`feat/corporate-website-v1`) và PR #6 (`fix/post-m0-audit-and-validation`) đã merge thành công vào `main` tại SHA `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881`. CI trên `main` (run 45038511590) đã kiểm tra thành công. Chưa có review độc lập: cùng một agent kỹ thuật thực hiện tuần tự việc phát triển, kiểm thử và rà soát bảo mật.
 
 ## Môi trường đo

@@ -1,5 +1,3 @@
-document.documentElement.classList.add('js');
-
 const toggle = document.querySelector('#menu-toggle');
 const nav = document.querySelector('#site-nav');
 if (toggle && nav) {
@@ -30,14 +28,33 @@ if (toggle && nav) {
   });
 }
 
-if ('IntersectionObserver' in window && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+if ('IntersectionObserver' in window) {
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const sections = document.querySelectorAll('[data-reveal]');
+  const revealed = new WeakSet();
+  function reveal(section) {
+    if (revealed.has(section)) return;
+    revealed.add(section);
+    section.classList.add('entered');
+    observer.unobserve(section);
+  }
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('entered');
-        observer.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) reveal(entry.target);
     }
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('[data-reveal]').forEach(section => observer.observe(section));
+  }, { threshold: 0.08 });
+  function updateMotion() {
+    observer.disconnect();
+    if (!motion.matches) {
+      sections.forEach(section => {
+        if (!revealed.has(section)) observer.observe(section);
+      });
+    }
+  }
+  motion.addEventListener('change', updateMotion);
+  updateMotion();
+  document.addEventListener('focusin', event => {
+    const section = event.target.closest('[data-reveal]');
+    if (section) reveal(section);
+  });
 }

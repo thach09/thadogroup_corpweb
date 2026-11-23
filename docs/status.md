@@ -1,5 +1,21 @@
 # Trạng thái dự án THADO GROUP v1
 
+## Current status ngày 23/11/2026
+
+Đã fetch origin. Main hiện tại là `558dfe2d2259a5863d6e44b977251b62dd9c1ae3`. PR #7, #8, #9 đã merge. CI main [45053384409](https://github.com/thach09/thadogroup_corpweb/actions/runs/45053384409) thành công. Preflight không có PR mở.
+
+Nhánh làm việc mới là `fix/final-security-and-hosting-readiness`, tạo từ origin/main và giữ đầy đủ thay đổi Gmail/motion chưa commit. SHA bàn giao được ghi trong Draft PR và báo cáo cuối.
+
+Ruleset Protect Main Branch (27847039) Active, target default branch. Đã sửa required status check thành Build and browser tests, integration GitHub Actions 15368. Giữ nguyên các rule khác, 0 reviewer bắt buộc và không có bypass. [Ruleset](https://github.com/thach09/thadogroup_corpweb/rules/27847039)
+
+Locally tested gồm npm ci, check, build với Ganbarou URL thật, Playwright 69 pass / 16 skip / 0 fail và npm audit 0. Gmail có trong VI/EN. Motion hiện mặc định, xử lý focus, reduced motion và thiếu IntersectionObserver. Zalo trên điện thoại là Owner confirmed theo yêu cầu cập nhật.
+
+Verified SSH read-only qua Tailscale. Có Forgejo, ứng dụng khác, Caddy Docker và cloudflared. Đã chuẩn bị template static staging riêng, chưa triển khai. Xem [self-hosting](self-hosting.md). Domain/DNS chưa thay đổi, release SHA chưa phê duyệt. Remote CI của nhánh bàn giao được cập nhật ở Draft PR sau push.
+
+## Historical status ngày 22/11/2026
+
+Phần dưới lưu trạng thái của đợt trước. Các nhận định quyền repo, mobile Zalo, SHA và hosting được thay thế bởi Current status phía trên.
+
 **Cập nhật 22/11/2026.** Trạng thái tính đến nhánh `fix/final-pre-release-stabilization`, sau khi PR #1 (`cb95c5a`) và PR #6 (`e8fc0b2`) đã merge thành công vào `main`. HEAD của `main` hiện tại là `e8fc0b2636d43ddf1f7aa281c1b3e325e6d6d881`. PR #5 (Dependabot TypeScript 7.x) đã đóng, không merge.
 
 ## Tóm tắt
