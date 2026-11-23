@@ -2,6 +2,10 @@
 
 ## Current audit và DevOps ngày 23/11/2026
 
+Remote [CI 45116596985](https://github.com/thach09/thadogroup_corpweb/actions/runs/45116596985) Success cho source `9ff8e09d0c2f65978fdf77f833c26730359b5550`. PR #10 có mergeable_state blocked khi required check chưa có kết quả, đồng thời PR giữ Draft. Đã xác minh cấu hình bằng GET active rules. Chưa thử thao tác merge một PR lỗi để tránh thực hiện merge ngoài phạm vi được phép.
+
+Đã đọc lại trạng thái quản trị repo. Secret scanning và push protection enabled. Metadata báo dependabot_security_updates disabled, endpoint vulnerability-alerts trả 404. Endpoint automated-security-fixes trả 200, chưa thống nhất với metadata nên chưa kết luận security updates đã hoạt động. Chỉ cập nhật required check theo quyền đã cấp, giữ các thiết lập khác để chủ repo kiểm tra trong Settings.
+
 Đã chuyển an toàn từ nhánh đã merge sang fix/final-security-and-hosting-readiness từ origin/main 558dfe2. Không bỏ thay đổi local. npm ci chạy lại thành công sau khi tạm dừng Astro preview đang khóa native compiler trên Windows. Check 0 lỗi/cảnh báo, build với Ganbarou URL tường minh thành công. Playwright 69 pass, 16 skip theo cấu hình, 0 fail. Audit dependency 0 lỗ hổng được registry báo cáo.
 
 Ruleset 27847039 đã đọc và cập nhật chỉ danh sách required checks, từ rỗng sang Build and browser tests / integration_id 15368. GET sau cập nhật xác nhận Active, default branch, 0 bypass và các rule khác không đổi. Workflow có pull_request trigger. Chưa thực hiện thử merge một PR CI đỏ, không suy diễn thao tác đó đã PASS. Sẽ đọc trạng thái PR và CI của đúng SHA sau push.

@@ -2,6 +2,8 @@
 
 ## Current handover ngày 23/11/2026
 
+Đã push source SHA `9ff8e09d0c2f65978fdf77f833c26730359b5550`, tạo [Draft PR #10](https://github.com/thach09/thadogroup_corpweb/pull/10) và xác nhận [CI 45116596985](https://github.com/thach09/thadogroup_corpweb/actions/runs/45116596985) Success trên đúng SHA. Commit tiếp theo chỉ bổ sung tài liệu bằng chứng, xem HEAD của PR cho SHA cuối. Nội dung staging/runtime chưa được đánh dấu nghiệm thu.
+
 Main đã fetch tại `558dfe2d2259a5863d6e44b977251b62dd9c1ae3`. PR #7–#9 đã merge. Nhánh bàn giao là `fix/final-security-and-hosting-readiness`. SHA và kết quả remote CI sẽ gắn vào Draft PR. Chủ dự án giữ quyền duyệt release, staging, DNS và production.
 
 Gmail và scroll motion đã được kiểm lại, npm ci/check/build thành công, Playwright 69 pass, 16 skip có chủ đích, 0 fail. Npm audit 0. Ganbarou build từ biến môi trường rõ ràng `https://heyganba.site/`, Jiayou để trống.

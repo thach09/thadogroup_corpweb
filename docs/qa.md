@@ -2,6 +2,8 @@
 
 ## Current verification cho nhánh bàn giao
 
+[CI 45116596985](https://github.com/thach09/thadogroup_corpweb/actions/runs/45116596985) Success trên source SHA `9ff8e09d0c2f65978fdf77f833c26730359b5550`. Đã kiểm từng step từ install/check/build đến Playwright và upload artifact. Run dùng workflow_dispatch sau khi lần tạo Draft PR chưa ghi nhận run tự động. [Draft PR #10](https://github.com/thach09/thadogroup_corpweb/pull/10)
+
 Ngày 23/11/2026, nền main 558dfe2, nhánh fix/final-security-and-hosting-readiness. Chạy lại npm ci, npm run check, npm run build, npm run test:e2e và npm audit. Build set GANBAROU_URL=https://heyganba.site/ và JIAYOU_URL trống. Check 0 lỗi/cảnh báo, Playwright 69 pass / 16 skip / 0 fail trong 30 giây, audit 0 lỗ hổng.
 
 Năm cấu hình Chromium desktop 1440, mobile 360, narrow 320 và WebKit tablet 768, mobile 390 đều chạy. Kiểm thử có axe, mailto/contact, keyboard, reduced motion, thiếu IntersectionObserver, JavaScript-off, URL validation và build production/noindex. Zalo điện thoại là Owner confirmed theo yêu cầu của chủ dự án, không phải kết quả giả lập.

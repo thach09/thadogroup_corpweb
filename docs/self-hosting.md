@@ -88,7 +88,7 @@ Người duyệt lưu checksum ở kênh tin cậy của PR. Checksum xác minh 
 
 1. Anh Hưng duyệt container, image digest, thư mục, port và người vận hành. Chạy lại ss -lnt, kiểm tra dung lượng. Tạo thư mục releases và log/backup riêng, không thay đổi Compose của Forgejo.
 2. Chuyển artifact đã kiểm checksum đến releases/<SHA>/site. Cấp quyền đọc directory/file cho UID 101. Parent directory mount cũng phải có quyền traverse cho UID đó. Không đặt web root dưới thư mục forgejo có quyền 700.
-3. Atomic switch trên cùng filesystem, trong thư mục THADO đã kiểm tra. Không chạy đồng thời hai release. Ghi readlink current làm bản rollback trước khi đổi.
+3. Atomic switch trên cùng filesystem, trong thư mục THADO đã kiểm tra. Không chạy đồng thời hai release. Ghi readlink current làm bản rollback trước khi đổi. Giữ các asset có hash trong /_astro/ của release trước ở release mới để tab HTML cũ tiếp tục tải được tài nguyên trong lúc chuyển. Nếu trùng tên, đối chiếu checksum trước khi gộp. Ghi lại checksum của cây phục vụ sau bước chuẩn bị này.
 
 ```sh
 cd /home/traidep/thado-web

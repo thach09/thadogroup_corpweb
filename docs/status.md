@@ -2,6 +2,8 @@
 
 ## Current status ngày 23/11/2026
 
+Source commit `9ff8e09d0c2f65978fdf77f833c26730359b5550` đã push. [Draft PR #10](https://github.com/thach09/thadogroup_corpweb/pull/10) đang mở. [CI 45116596985](https://github.com/thach09/thadogroup_corpweb/actions/runs/45116596985) chạy workflow_dispatch trên đúng SHA này, job Build and browser tests Success. Bổ sung bằng chứng tài liệu sau commit source, SHA cuối xem HEAD của PR. Chưa merge hoặc duyệt release.
+
 Đã fetch origin. Main hiện tại là `558dfe2d2259a5863d6e44b977251b62dd9c1ae3`. PR #7, #8, #9 đã merge. CI main [45053384409](https://github.com/thach09/thadogroup_corpweb/actions/runs/45053384409) thành công. Preflight không có PR mở.
 
 Nhánh làm việc mới là `fix/final-security-and-hosting-readiness`, tạo từ origin/main và giữ đầy đủ thay đổi Gmail/motion chưa commit. SHA bàn giao được ghi trong Draft PR và báo cáo cuối.
