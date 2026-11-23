@@ -20,8 +20,10 @@ a:focus-visible, button:focus-visible, [tabindex="-1"]:focus-visible { outline: 
 section[id], footer[id], main[id] { scroll-margin-top: 100px }
 .skip { position: fixed; left: 12px; top: -90px; z-index: 20; background: var(--ink); color: white; padding: 12px 20px }
 .skip:focus { top: 10px }
-.site-head { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid var(--line); background: white }
+.site-head { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid var(--line); background: white; transition: background-color 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease }
+.site-head.scrolled { background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(16, 36, 71, 0.08) }
 .site-head::before { content: ''; display: block; height: 3px; background: linear-gradient(90deg,#c51f3a 0 37%,#dd5269 56%,#102447 100%) }
+.scroll-progress { position: absolute; bottom: -1px; left: 0; height: 2px; background: linear-gradient(90deg, var(--red), #e03b54); width: var(--scroll-p, 0%); pointer-events: none; z-index: 6; transition: width 0.08s linear }
 .head-inner { min-height: 78px; display: flex; align-items: center; gap: clamp(16px,3vw,48px) }
 .brand { display: inline-flex; align-items: center; white-space: nowrap; min-height: 44px }
 .brand img.brand-logo { display: block; height: clamp(34px, 4vw, 40px); width: auto; max-width: 100%; object-fit: contain }
@@ -150,22 +152,58 @@ footer h2 { font-size:1.75rem; letter-spacing:-.045em; margin-top:16px; font-wei
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes scroll-enter {
-  from { opacity: .4; transform: translateY(14px); }
-  to { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+html.has-reveal [data-reveal] {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion:no-preference) {
-  [data-reveal].entered { animation: scroll-enter 500ms cubic-bezier(.16,1,.3,1) both; }
-  .product-grid [data-reveal]:nth-child(2).entered { animation-delay:70ms; }
+  html.has-reveal [data-reveal].entered,
+  [data-reveal].entered {
+    opacity: 1;
+    animation: scroll-enter 650ms cubic-bezier(.16,1,.3,1) both;
+  }
+  .product-grid [data-reveal]:nth-child(2).entered { animation-delay: 150ms; }
+  .footer-grid.entered .footer-brand { animation: scroll-enter 650ms cubic-bezier(.16,1,.3,1) both; }
+  .footer-grid.entered .contact-person { animation: scroll-enter 650ms cubic-bezier(.16,1,.3,1) 120ms both; }
+  .footer-grid.entered .contact-social { animation: scroll-enter 650ms cubic-bezier(.16,1,.3,1) 240ms both; }
+  .about-grid.entered > div { animation: scroll-enter 650ms cubic-bezier(.16,1,.3,1) both; }
+  .about-grid.entered > p { animation: scroll-enter 650ms cubic-bezier(.16,1,.3,1) 140ms both; }
+
   .hero-copy { animation: enter 600ms cubic-bezier(0.16, 1, 0.3, 1) both; }
   .sectors { animation: enter 600ms cubic-bezier(0.16, 1, 0.3, 1) 100ms both; }
   .sectors li:nth-child(1) { animation: enter 450ms cubic-bezier(0.16, 1, 0.3, 1) 150ms both; }
   .sectors li:nth-child(2) { animation: enter 450ms cubic-bezier(0.16, 1, 0.3, 1) 220ms both; }
   .sectors li:nth-child(3) { animation: enter 450ms cubic-bezier(0.16, 1, 0.3, 1) 290ms both; }
   .sectors li:nth-child(4) { animation: enter 450ms cubic-bezier(0.16, 1, 0.3, 1) 360ms both; }
-  .hero-copy:focus-within, .sectors:focus-within, .sectors li:focus-within, [data-reveal]:focus-within { animation: none; }
+  .hero-copy:focus-within, .sectors:focus-within, .sectors li:focus-within, [data-reveal]:focus-within {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 @media (prefers-reduced-motion:reduce) {
   :root { scroll-behavior:auto }
-  .product, .product-arrow, .socials a { transition:none }
+  .scroll-progress { display: none !important; }
+  html.has-reveal [data-reveal],
+  [data-reveal],
+  [data-reveal].entered,
+  .footer-grid.entered .footer-brand,
+  .footer-grid.entered .contact-person,
+  .footer-grid.entered .contact-social,
+  .about-grid.entered > div,
+  .about-grid.entered > p,
+  .product,
+  .product-arrow,
+  .socials a {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    transition-duration: 0s !important;
+  }
   .product.is-clickable:hover, .product.is-clickable:hover .product-arrow, .socials a:hover { transform:none }
 }
