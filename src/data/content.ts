@@ -8,7 +8,7 @@ type Copy = {
   aboutTitle: string; aboutText: string; productTitle: string;
   productDescriptions: Record<'ganbarou' | 'jiayou', string>;
   soon: string; visit: (name: string) => string;
-  founder: string; phone: string; copy: string; copied: string; manual: string;
+  founder: string; phone: string; email: string; copy: string; copied: string; manual: string;
   zaloLabel: string;
 };
 
@@ -28,7 +28,7 @@ export const copy: Record<Language, Copy> = {
     productTitle: 'Sản phẩm của THADO EDU',
     productDescriptions: { ganbarou: 'Nền tảng học tiếng Nhật.', jiayou: 'Nền tảng học tiếng Trung.' },
     soon: 'Sắp ra mắt', visit: name => 'Mở website ' + name,
-    founder: 'Nhà sáng lập & CEO', phone: 'Điện thoại', copy: 'Sao chép số Zalo',
+    founder: 'Nhà sáng lập & CEO', phone: 'Điện thoại', email: 'Email', copy: 'Sao chép số Zalo',
     copied: 'Đã sao chép số Zalo.', manual: 'Bạn có thể chọn và sao chép số 0354314095.',
     zaloLabel: 'Liên hệ qua Zalo'
   },
@@ -47,7 +47,7 @@ export const copy: Record<Language, Copy> = {
     productTitle: 'Products from THADO EDU',
     productDescriptions: { ganbarou: 'A platform for learning Japanese.', jiayou: 'A platform for learning Chinese.' },
     soon: 'Coming soon', visit: name => 'Visit the ' + name + ' website',
-    founder: 'Founder & CEO', phone: 'Phone', copy: 'Copy Zalo number',
+    founder: 'Founder & CEO', phone: 'Phone', email: 'Email', copy: 'Copy Zalo number',
     copied: 'Zalo number copied.', manual: 'Select and copy the number 0354314095.',
     zaloLabel: 'Contact via Zalo'
   }

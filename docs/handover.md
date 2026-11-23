@@ -1,5 +1,21 @@
 # Bàn giao THADO GROUP Corporate Website v1
 
+## Current handover ngày 23/11/2026
+
+Đã push source SHA `9ff8e09d0c2f65978fdf77f833c26730359b5550`, tạo [Draft PR #10](https://github.com/thach09/thadogroup_corpweb/pull/10) và xác nhận [CI 45116596985](https://github.com/thach09/thadogroup_corpweb/actions/runs/45116596985) Success trên đúng SHA. Commit tiếp theo chỉ bổ sung tài liệu bằng chứng, xem HEAD của PR cho SHA cuối. Nội dung staging/runtime chưa được đánh dấu nghiệm thu.
+
+Main đã fetch tại `558dfe2d2259a5863d6e44b977251b62dd9c1ae3`. PR #7–#9 đã merge. Nhánh bàn giao là `fix/final-security-and-hosting-readiness`. SHA và kết quả remote CI sẽ gắn vào Draft PR. Chủ dự án giữ quyền duyệt release, staging, DNS và production.
+
+Gmail và scroll motion đã được kiểm lại, npm ci/check/build thành công, Playwright 69 pass, 16 skip có chủ đích, 0 fail. Npm audit 0. Ganbarou build từ biến môi trường rõ ràng `https://heyganba.site/`, Jiayou để trống.
+
+Ruleset Active và required check Build and browser tests đã được cấu hình, nguồn GitHub Actions app 15368. Các bảo vệ còn lại giữ nguyên. SSH khảo sát thành công ở chế độ read-only. Chuẩn bị Nginx/Compose static riêng để chủ server duyệt, chưa tạo staging, đổi mạng hoặc restart dịch vụ. Zalo điện thoại là Owner confirmed. Thu hồi token Forgejo cũ là OWNER TO VERIFY.
+
+Xem [trạng thái](status.md), [QA](qa.md), [Security](security.md), [phương án self-host và staging](self-hosting.md), [phát hành](release.md).
+
+## Historical handover ngày 22/11/2026
+
+Các số liệu SHA, PR, quyền repo và thao tác copy Zalo dưới đây là lịch sử, xem Current handover để vận hành bản mới.
+
 **Ngày 22/11/2026.** Tài liệu này là điểm vào cho người nhận bàn giao: trạng thái commit, cách xem preview, vị trí cập nhật nội dung, bằng chứng kiểm tra, điều kiện còn chờ và cách quay lui.
 
 ## Trạng thái bàn giao
